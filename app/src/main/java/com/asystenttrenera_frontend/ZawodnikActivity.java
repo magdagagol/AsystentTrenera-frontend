@@ -5,10 +5,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ZawodnikActivity extends AppCompatActivity {
+public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapter.ItemClicked {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
@@ -44,5 +45,10 @@ public class ZawodnikActivity extends AppCompatActivity {
 
         adapter = new ZawodnikAdapter(this, zawodnik);
         recyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemClicked(int index) {
+        Toast.makeText(this, "Imie: " + zawodnik.get(index).getImie(), Toast.LENGTH_SHORT).show();
     }
 }

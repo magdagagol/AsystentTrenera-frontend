@@ -14,9 +14,15 @@ import java.util.ArrayList;
 public class ZawodnikAdapter extends RecyclerView.Adapter<ZawodnikAdapter.ViewHolder> {
 
     private ArrayList<Zawodnik> zawodnik;
+    ItemClicked activity;
+
+    public interface ItemClicked {
+        void onItemClicked(int index);
+    }
 
     public ZawodnikAdapter (Context context, ArrayList<Zawodnik> list) {
         zawodnik = list;
+        activity = (ItemClicked) context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -38,7 +44,7 @@ public class ZawodnikAdapter extends RecyclerView.Adapter<ZawodnikAdapter.ViewHo
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    activity.onItemClicked(zawodnik.indexOf((Zawodnik) view.getTag()));
                 }
             });
         }
