@@ -1,4 +1,4 @@
-package com.asystenttrenera_frontend;
+package com.asystenttrenera_frontend.zawodnik;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.asystenttrenera_frontend.R;
 
 import java.util.ArrayList;
 

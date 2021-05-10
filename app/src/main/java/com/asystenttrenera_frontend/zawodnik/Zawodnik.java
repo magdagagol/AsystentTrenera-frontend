@@ -1,4 +1,4 @@
-package com.asystenttrenera_frontend;
+package com.asystenttrenera_frontend.zawodnik;
 
 public class Zawodnik {
     private Long id;

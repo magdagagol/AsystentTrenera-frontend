@@ -1,11 +1,14 @@
-package com.asystenttrenera_frontend;
+package com.asystenttrenera_frontend.zawodnik;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.asystenttrenera_frontend.R;
 
 import java.util.ArrayList;
 
@@ -50,5 +53,9 @@ public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapt
     @Override
     public void onItemClicked(int index) {
         Toast.makeText(this, "Imie: " + zawodnik.get(index).getImie(), Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(ZawodnikActivity.this, ZawodnikDetails.class );
+        intent.putExtra("id", index);
+        startActivity(intent);
     }
 }
