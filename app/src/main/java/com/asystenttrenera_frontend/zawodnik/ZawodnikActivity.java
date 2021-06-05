@@ -6,15 +6,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.asystenttrenera_frontend.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -37,28 +44,27 @@ public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapt
         recyclerView.setLayoutManager(layoutManager);
 
         zawodnik = new ArrayList<Zawodnik>();
-
-        //Simple request using volley
         RequestQueue requestQueue = Volley.newRequestQueue(this);
+        //Simple request using volley
         String url = "http://192.168.0.80:8080/api/zawodnik";
-        //"http://127.0.0.1:8080/api/zawodnik"; //"http://localhost:8080/api/zawodnik";
-        //String url = "https://any-api.com/oxforddictionaries_com/oxforddictionaries_com/docs/_languages"; //"http://localhost:8080/api/zawodnik";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
-            public void onResponse(String response) {
-                String resp = response.substring(0,500);
-                System.out.println("Jest JSON " + response.substring(0,500).toString());
-                }
-            }, new Response.ErrorListener() {
+            public void onResponse(JSONArray response) {
+               // Log.i("res", response.toString());
+                System.out.println(response);
+
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Opreacja nie powiodła się");
                 error.printStackTrace();
             }
         });
+        requestQueue.add(jsonArrayRequest);
+       // MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
 
-        requestQueue.add(stringRequest);
+
         /*
         zawodnik.add(new Zawodnik(1L, "Adrian1", "Nowy", "2015", "a@a", "535353"));
         zawodnik.add(new Zawodnik(2L, "Badam2", "Nowy", "2015", "a@a", "535353"));
