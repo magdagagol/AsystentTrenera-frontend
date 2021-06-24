@@ -1,5 +1,6 @@
 package com.asystenttrenera_frontend.zawodnik;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -17,6 +21,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.asystenttrenera_frontend.MainActivity;
 import com.asystenttrenera_frontend.R;
 
 import org.json.JSONArray;
@@ -51,8 +56,27 @@ public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapt
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-               // Log.i("res", response.toString());
-                System.out.println(response);
+                // Log.i("res", response.toString());
+                try {
+                    for(int i=0; i<response.length(); i++){
+                        JSONObject responseObj = response.getJSONObject(i);
+                        Long id = responseObj.getLong("id");
+                        String imie = responseObj.getString("imie");
+                        String nazwisko = responseObj.getString("nazwisko");
+                        String rokUrodzenia = responseObj.getString("rokUrodzenia");
+                        String email = responseObj.getString("email");
+                        String numerTelefonu = responseObj.getString("numerTelefonu");
+
+                        zawodnik.add(new Zawodnik(id, imie, nazwisko, rokUrodzenia, email, numerTelefonu));
+                        //System.out.println(zawodnik);
+                        adapter = new ZawodnikAdapter(ZawodnikActivity.this, zawodnik);
+                        recyclerView.setAdapter(adapter);
+
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {
@@ -62,28 +86,14 @@ public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapt
             }
         });
         requestQueue.add(jsonArrayRequest);
-       // MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
 
+        System.out.println("zawodnik ---" + zawodnik);
 
-        /*
-        zawodnik.add(new Zawodnik(1L, "Adrian1", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(2L, "Badam2", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(3L, "Cdrian3", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(4L, "Ddrian4", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(5L, "Edrian5", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(6L, "Fdrian6", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(7L, "Gdrian7", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(8L, "Adrian8", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(9L, "Badam9", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(10L, "Cdrian10", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(11L, "Ddrian11", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(12L, "Edrian12", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(13L, "Fdrian13", "Nowy", "2015", "a@a", "535353"));
-        zawodnik.add(new Zawodnik(14L, "Gdrian14", "Nowy", "2015", "a@a", "535353"));
-        */
-
-        adapter = new ZawodnikAdapter(this, zawodnik);
-        recyclerView.setAdapter(adapter);
+        for(Zawodnik z : zawodnik){
+            System.out.println("xxx" + z.getId());
+        }
+        //adapter = new ZawodnikAdapter(this, zawodnik);
+        //recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -93,5 +103,26 @@ public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapt
         Intent intent = new Intent(ZawodnikActivity.this, ZawodnikDetails.class );
         intent.putExtra("id", index);
         startActivity(intent);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.lista_zawodnikow_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.item1:
+                Toast.makeText(this, "Item 1", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(ZawodnikActivity.this, DodajZawodnika.class);
+                startActivity(intent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }

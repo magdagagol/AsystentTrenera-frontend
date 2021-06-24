@@ -1,6 +1,11 @@
 package com.asystenttrenera_frontend.zawodnik;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Zawodnik {
+    @PrimaryKey(autoGenerate = true)
     private Long id;
     private String imie;
     private String nazwisko;
@@ -17,12 +22,16 @@ public class Zawodnik {
         this.numerTelefonu = numerTelefonu;
     }
 
-    public Long getId() {
-        return id;
+    public Zawodnik(String imie, String nazwisko, String rokUrodzenia, String email, String numerTelefonu) {
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.rokUrodzenia = rokUrodzenia;
+        this.email = email;
+        this.numerTelefonu = numerTelefonu;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getId() {
+        return id;
     }
 
     public String getImie() {
