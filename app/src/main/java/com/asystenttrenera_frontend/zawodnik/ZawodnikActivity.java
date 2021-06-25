@@ -86,14 +86,6 @@ public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapt
             }
         });
         requestQueue.add(jsonArrayRequest);
-
-        System.out.println("zawodnik ---" + zawodnik);
-
-        for(Zawodnik z : zawodnik){
-            System.out.println("xxx" + z.getId());
-        }
-        //adapter = new ZawodnikAdapter(this, zawodnik);
-        //recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -101,7 +93,8 @@ public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapt
         Toast.makeText(this, "Imie: " + zawodnik.get(index).getImie(), Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(ZawodnikActivity.this, ZawodnikDetails.class );
-        intent.putExtra("id", index);
+        int id = zawodnik.get(index).getId().intValue();
+        intent.putExtra("id",zawodnik.get(index).getId());
         startActivity(intent);
     }
 
