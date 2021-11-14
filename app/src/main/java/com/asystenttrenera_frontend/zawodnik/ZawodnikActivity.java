@@ -94,7 +94,7 @@ public class ZawodnikActivity extends AppCompatActivity implements ZawodnikAdapt
 
         Intent intent = new Intent(ZawodnikActivity.this, ZawodnikDetails.class );
         int id = zawodnik.get(index).getId().intValue();
-        intent.putExtra("id",zawodnik.get(index).getId());
+        intent.putExtra("id",id);
         startActivity(intent);
     }
 

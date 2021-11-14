@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsystentTrenerafrontend">
-        <activity android:name=".zawodnik.DodajZawodnika"></activity>
+        <activity android:name=".zawodnik.EdytujZawodnika"></activity>
+        <activity android:name=".zawodnik.DodajZawodnika" />
         <activity android:name=".zawodnik.ZawodnikDetails" />
         <activity android:name=".zawodnik.ZawodnikActivity" />
         <activity android:name=".MainActivity">
