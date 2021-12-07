@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.asystenttrenera_frontend.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ParticipantAdapter  extends RecyclerView.Adapter<ParticipantAdapter.ViewHolder> {
     private ArrayList<Participant> participants;
@@ -50,12 +51,12 @@ public class ParticipantAdapter  extends RecyclerView.Adapter<ParticipantAdapter
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ParticipantAdapter.ViewHolder holder, int position) {
-        holder.participantName.setText("name");
-        holder.participantSurname.setText("surname");
-        holder.participantEmail.setText("email");
-        holder.participantPhone.setText("phone");
-        holder.participantYearOfBirth.setText("year of birth");
+    public void onBindViewHolder(@NonNull ParticipantAdapter.ViewHolder holder, int i) {
+        holder.participantName.setText(participants.get(i).getName());
+        holder.participantSurname.setText(participants.get(i).getSurname());
+        holder.participantEmail.setText(participants.get(i).getEmail());
+        holder.participantPhone.setText(participants.get(i).getPhoneNumber());
+        holder.participantYearOfBirth.setText(participants.get(i).getYearOfBirth());
     }
 
     @Override
