@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ParticipantService participantService = new ParticipantService(MainActivity.this);
-                participantService.participantStr(new ParticipantService.VolleyResponseListener() {
+                participantService.participantsObject(new ParticipantService.VolleyResponseListener() {
                     @Override
                     public void onError(String message) {
                         Toast.makeText(MainActivity.this,"Something wrong", Toast.LENGTH_SHORT).show();

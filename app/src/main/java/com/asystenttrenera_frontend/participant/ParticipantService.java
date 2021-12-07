@@ -30,7 +30,7 @@ public class ParticipantService {
         void onResponse(JSONObject response);
     }
 
-    public void participantStr(VolleyResponseListener volleyResponseListener){
+    public void participantsObject(VolleyResponseListener volleyResponseListener){
         String url = QUERY_FOR_PARTICIPANTS;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
@@ -58,5 +58,5 @@ public class ParticipantService {
         MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
 
     }
-
+    
 }
