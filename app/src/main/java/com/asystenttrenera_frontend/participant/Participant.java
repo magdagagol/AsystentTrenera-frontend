@@ -11,12 +11,27 @@ public class Participant {
     private String email;
     private String phoneNumber;
 
+    public Participant() {
+    }
+
     public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber) {
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "Participant{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", yearOfBirth='" + yearOfBirth + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 
     public Long getId() {

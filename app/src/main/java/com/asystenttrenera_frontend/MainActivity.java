@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onResponse(JSONObject response) {
+                    public void onResponse(List<Participant> response) {
                         Toast.makeText(MainActivity.this,"Response works" + response.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });

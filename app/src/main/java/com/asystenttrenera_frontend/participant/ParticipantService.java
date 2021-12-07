@@ -27,7 +27,7 @@ public class ParticipantService {
     public interface VolleyResponseListener{
         void onError(String message);
 
-        void onResponse(JSONObject response);
+        void onResponse(List<Participant> response);
     }
 
     public void participantsObject(VolleyResponseListener volleyResponseListener){
@@ -37,15 +37,24 @@ public class ParticipantService {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        JSONObject participant = null;
+                        List<Participant> participantList = new ArrayList<>();
                         try {
-                            participant = response.getJSONObject(0);
+                            for(int i=0; i<response.length(); i++){ ;
+                                JSONObject participant = response.getJSONObject(i);
+                                participantList.add(new Participant(
+                                        participant.getString("name"),
+                                        participant.getString("surname"),
+                                        participant.getString("yearOfBirth"),
+                                        participant.getString("email"),
+                                        participant.getString("phoneNumber")
+                                ));
+                            }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         //Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
-                        volleyResponseListener.onResponse(participant);
+                        volleyResponseListener.onResponse(participantList);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -58,5 +67,5 @@ public class ParticipantService {
         MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
 
     }
-    
+
 }
