@@ -14,12 +14,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.asystenttrenera_frontend.participant.MySingleton;
 import com.asystenttrenera_frontend.participant.Participant;
 import com.asystenttrenera_frontend.participant.ParticipantActivity;
+import com.asystenttrenera_frontend.participant.ParticipantService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button btnZawodnicy;
@@ -34,36 +39,22 @@ public class MainActivity extends AppCompatActivity {
         btnZawodnicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ParticipantService participantService = new ParticipantService(MainActivity.this);
+                participantService.participantStr(new ParticipantService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this,"Something wrong", Toast.LENGTH_SHORT).show();
+                    }
 
-                RequestQueue queue = Volley.newRequestQueue(MainActivity.this);
-                String url ="http://10.0.2.2:8080/api/zawodnik";
-
-                JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null,
-                        new Response.Listener<JSONArray>() {
-                            @Override
-                            public void onResponse(JSONArray response) {
-
-                                try {
-                                    JSONObject participant = response.getJSONObject(0);
-                                    System.out.printf("##########################" + response.length());
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                                Toast.makeText(MainActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-                            }
-                        }, new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(MainActivity.this, "response don't works", Toast.LENGTH_SHORT).show();
-                            }
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(MainActivity.this,"Response works" + response.toString(), Toast.LENGTH_SHORT).show();
+                    }
                 });
 
-                queue.add(jsonArrayRequest);
-
-
-                //Intent intent = new Intent(MainActivity.this, ParticipantActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ParticipantActivity.class);
+                intent.putExtra("participants", participantService.toString());
+                startActivity(intent);
             }
         });
 

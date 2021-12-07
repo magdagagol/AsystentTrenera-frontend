@@ -1,5 +1,6 @@
 package com.asystenttrenera_frontend.participant;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -33,6 +34,11 @@ public class ParticipantActivity extends AppCompatActivity {
         //recyclerView.setAdapter(adapter);
 
         Toast.makeText(this,"This activity works fine ", Toast.LENGTH_LONG).show();
+
+        Intent intent = getIntent();
+        String participants = intent.getStringExtra("participants");
+
+        Toast.makeText(this,"Participants from participant activity" + participants, Toast.LENGTH_LONG).show();
 
     }
 }
