@@ -23,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,14 +48,15 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onResponse(List<Participant> response) {
-                        Toast.makeText(MainActivity.this,"Response works" + response.toString(), Toast.LENGTH_SHORT).show();
+                    public void onResponse(ArrayList<Participant> response) {
+                        Toast.makeText(MainActivity.this,"Response works" + response, Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(MainActivity.this, ParticipantActivity.class);
+                        intent.putExtra("participants", response);
+                        startActivity(intent);
+
                     }
                 });
-
-                Intent intent = new Intent(MainActivity.this, ParticipantActivity.class);
-                intent.putExtra("participants", participantService.toString());
-                startActivity(intent);
             }
         });
 

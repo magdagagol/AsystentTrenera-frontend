@@ -1,7 +1,6 @@
 package com.asystenttrenera_frontend.participant;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -13,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ParticipantService {
     public static final String QUERY_FOR_PARTICIPANTS = "http://10.0.2.2:8080/api/zawodnik";
@@ -27,7 +25,7 @@ public class ParticipantService {
     public interface VolleyResponseListener{
         void onError(String message);
 
-        void onResponse(List<Participant> response);
+        void onResponse(ArrayList<Participant> response);
     }
 
     public void participantsObject(VolleyResponseListener volleyResponseListener){
@@ -37,7 +35,7 @@ public class ParticipantService {
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
-                        List<Participant> participantList = new ArrayList<>();
+                        ArrayList<Participant> participantList = new ArrayList<>();
                         try {
                             for(int i=0; i<response.length(); i++){ ;
                                 JSONObject participant = response.getJSONObject(i);
@@ -53,13 +51,11 @@ public class ParticipantService {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        //Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                         volleyResponseListener.onResponse(participantList);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Toast.makeText(context, "response don't works", Toast.LENGTH_SHORT).show();
                 volleyResponseListener.onError("Something wrong");
             }
         });

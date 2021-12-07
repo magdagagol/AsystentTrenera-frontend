@@ -26,23 +26,14 @@ public class ParticipantActivity extends AppCompatActivity {
         Toast.makeText(this,"This activity works fine ", Toast.LENGTH_LONG).show();
 
         Intent intent = getIntent();
-        String participants = intent.getStringExtra("participants");
+        ArrayList<Participant> participantList = intent.getParcelableArrayListExtra("participants");
 
-        Toast.makeText(this,"Participants from participant activity" + participants, Toast.LENGTH_LONG).show();
 
         recyclerView = findViewById(R.id.participantRecyclerView);
         //recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        ArrayList<Participant> participantList = new ArrayList<>();
-
-        Participant participant1 = new Participant("aaaa","aaaa", "aaaaa", "wwww","www");
-        Participant participant2 = new Participant("bbb","bbb", "bbbb", "wwww","www");
-
-        participantList.add(participant1);
-        participantList.add(participant2);
 
         adapter = new ParticipantAdapter(this, participantList);
         recyclerView.setAdapter(adapter);
