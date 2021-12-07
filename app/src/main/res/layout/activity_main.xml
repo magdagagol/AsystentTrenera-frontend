@@ -7,15 +7,45 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="412dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/btnZawodnicy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="100dp"
-            android:text="Zawodnicy" />
+            android:id="@+id/btnGroups"
+            android:layout_width="195dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="@string/grupy" />
+
+        <Button
+            android:id="@+id/btnParticipants"
+            android:layout_width="193dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="@string/zawodnicy" />
+
+        <Button
+            android:id="@+id/btnAttendentRegister"
+            android:layout_width="195dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="@string/lista_obecno_i" />
+
+        <Button
+            android:id="@+id/btnMessages"
+            android:layout_width="194dp"
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:text="@string/wiadomo_ci" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

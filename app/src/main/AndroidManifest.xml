@@ -12,11 +12,13 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AsystentTrenerafrontend">
+        android:theme="@style/Theme.AsystentTrenerafrontend"
+        android:usesCleartextTraffic="true">
         <activity android:name=".zawodnik.EdytujZawodnika"></activity>
         <activity android:name=".zawodnik.DodajZawodnika" />
         <activity android:name=".zawodnik.ZawodnikDetails" />
         <activity android:name=".zawodnik.ZawodnikActivity" />
+        <activity android:name=".participant.ParticipantActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

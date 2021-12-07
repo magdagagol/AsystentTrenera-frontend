@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/layout/activity_dodaj_zawodnika.xml" value="0.209375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.37623762376237624" />
+        <entry key="app/src/main/res/layout/activity_participant.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/participant_activity.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/participants_activity.xml" value="0.3765625" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

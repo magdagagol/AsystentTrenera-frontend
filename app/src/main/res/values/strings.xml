@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AsystentTrenera-frontend</string>
+    <string name="grupy">Grupy</string>
+    <string name="zawodnicy">Zawodnicy</string>
+    <string name="lista_obecno_i">Lista obecnośći</string>
+    <string name="wiadomo_ci">Wiadomości</string>
 </resources>
