@@ -1,6 +1,7 @@
 package com.asystenttrenera_frontend.participant;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +10,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.asystenttrenera_frontend.MainActivity;
 import com.asystenttrenera_frontend.R;
+import com.asystenttrenera_frontend.zawodnik.ZawodnikAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ParticipantAdapter  extends RecyclerView.Adapter<ParticipantAdapter.ViewHolder> {
     private ArrayList<Participant> participants;
+    ItemClicked activity;
+
+    public interface ItemClicked {
+        void onItemClicked(int participant);
+    }
 
     public ParticipantAdapter(Context context, ArrayList<Participant> participants) {
         this.participants = participants;
+        activity = (ItemClicked) context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -36,6 +45,13 @@ public class ParticipantAdapter  extends RecyclerView.Adapter<ParticipantAdapter
             this.participantEmail = view.findViewById(R.id.participantEmail);
             this.participantPhone = view.findViewById(R.id.participantPhone);
             this.participantYearOfBirth = view.findViewById(R.id.participantYearOfBirth);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    activity.onItemClicked(participants.indexOf(view.getTag()));
+                }
+            });
         }
 
     }
@@ -52,6 +68,7 @@ public class ParticipantAdapter  extends RecyclerView.Adapter<ParticipantAdapter
 
     @Override
     public void onBindViewHolder(@NonNull ParticipantAdapter.ViewHolder holder, int i) {
+        holder.itemView.setTag(participants.get(i));
         holder.participantName.setText(participants.get(i).getName());
         holder.participantSurname.setText(participants.get(i).getSurname());
         holder.participantEmail.setText(participants.get(i).getEmail());

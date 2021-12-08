@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AsystentTrenerafrontend"
         android:usesCleartextTraffic="true">
-        <activity android:name=".zawodnik.EdytujZawodnika"></activity>
+        <activity
+            android:name=".participant.ParticipantDetails"
+            android:exported="false" />
+        <activity android:name=".zawodnik.EdytujZawodnika" />
         <activity android:name=".zawodnik.DodajZawodnika" />
         <activity android:name=".zawodnik.ZawodnikDetails" />
         <activity android:name=".zawodnik.ZawodnikActivity" />

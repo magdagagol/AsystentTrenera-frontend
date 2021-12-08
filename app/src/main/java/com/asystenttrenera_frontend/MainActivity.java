@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(ArrayList<Participant> response) {
-                        Toast.makeText(MainActivity.this,"Response works" + response, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this,"Response works" + response, Toast.LENGTH_SHORT).show();
 
                         Intent intent = new Intent(MainActivity.this, ParticipantActivity.class);
                         intent.putExtra("participants", response);
