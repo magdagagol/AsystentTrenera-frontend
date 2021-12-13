@@ -41,7 +41,7 @@
             android:minHeight="48dp" />
 
         <EditText
-            android:id="@+id/addYearOfBirdt"
+            android:id="@+id/addYearOfBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

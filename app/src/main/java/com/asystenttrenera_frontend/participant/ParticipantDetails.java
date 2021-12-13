@@ -4,12 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.widget.EditText;
 
 import com.asystenttrenera_frontend.R;
-
-import java.util.ArrayList;
 
 public class ParticipantDetails extends AppCompatActivity {
 
@@ -22,7 +19,7 @@ public class ParticipantDetails extends AppCompatActivity {
         EditText addName = findViewById(R.id.addName);
         EditText addSurname = findViewById(R.id.addSurname);
         EditText addEmail = findViewById(R.id.addEmail);
-        EditText addYearOfBirdth = findViewById(R.id.addYearOfBirdt);
+        EditText addYearOfBirth = findViewById(R.id.addYearOfBirth);
         EditText addPhoneNumber = findViewById(R.id.addPhoneNumber);
 
         Intent intent = getIntent();
@@ -33,7 +30,7 @@ public class ParticipantDetails extends AppCompatActivity {
         addName.setText(participant.getName());
         addSurname.setText(participant.getSurname());
         addEmail.setText(participant.getEmail());
-        addYearOfBirdth.setText(participant.getYearOfBirth());
+        addYearOfBirth.setText(participant.getYearOfBirth());
         addPhoneNumber.setText(participant.getPhoneNumber());
     }
 }

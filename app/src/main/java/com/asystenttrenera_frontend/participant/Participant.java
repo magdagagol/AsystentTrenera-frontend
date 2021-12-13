@@ -1,10 +1,19 @@
 package com.asystenttrenera_frontend.participant;
 
+import android.icu.util.IslamicCalendar;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.Display;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.asystenttrenera_frontend.parent.Parent;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class Participant implements Parcelable {
     private Long id;
@@ -13,8 +22,15 @@ public class Participant implements Parcelable {
     private String yearOfBirth;
     private String email;
     private String phoneNumber;
+    private List<Parent> parents;
 
-    public Participant() {
+    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, List<Parent> parents) {
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.parents = parents;
     }
 
     public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber) {
@@ -23,6 +39,16 @@ public class Participant implements Parcelable {
         this.yearOfBirth = yearOfBirth;
         this.email = email;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, List<Parent> parents) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.parents = parents;
     }
 
     @Override
@@ -34,53 +60,9 @@ public class Participant implements Parcelable {
                 ", yearOfBirth='" + yearOfBirth + '\'' +
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", parents=" + parents +
                 '}';
     }
-
-    protected Participant(Parcel in) {
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readLong();
-        }
-        name = in.readString();
-        surname = in.readString();
-        yearOfBirth = in.readString();
-        email = in.readString();
-        phoneNumber = in.readString();
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        if (id == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeLong(id);
-        }
-        dest.writeString(name);
-        dest.writeString(surname);
-        dest.writeString(yearOfBirth);
-        dest.writeString(email);
-        dest.writeString(phoneNumber);
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Creator<Participant> CREATOR = new Creator<Participant>() {
-        @Override
-        public Participant createFromParcel(Parcel in) {
-            return new Participant(in);
-        }
-
-        @Override
-        public Participant[] newArray(int size) {
-            return new Participant[size];
-        }
-    };
 
     public Long getId() {
         return id;
@@ -125,4 +107,61 @@ public class Participant implements Parcelable {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
+
+    public List<Parent> getParents() {
+        return parents;
+    }
+
+    public void setParents(List<Parent> parents) {
+        this.parents = parents;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.surname);
+        dest.writeString(this.yearOfBirth);
+        dest.writeString(this.email);
+        dest.writeString(this.phoneNumber);
+        dest.writeList(this.parents);
+    }
+
+    public void readFromParcel(Parcel source) {
+        this.id = (Long) source.readValue(Long.class.getClassLoader());
+        this.name = source.readString();
+        this.surname = source.readString();
+        this.yearOfBirth = source.readString();
+        this.email = source.readString();
+        this.phoneNumber = source.readString();
+        this.parents = source.readParcelable(Parent.class.getClassLoader());
+    }
+
+    protected Participant(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.name = in.readString();
+        this.surname = in.readString();
+        this.yearOfBirth = in.readString();
+        this.email = in.readString();
+        this.phoneNumber = in.readString();
+        this.parents  = new ArrayList<Parent>();
+        in.readList(parents, Parent.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Participant> CREATOR = new Parcelable.Creator<Participant>() {
+        @Override
+        public Participant createFromParcel(Parcel source) {
+            return new Participant(source);
+        }
+
+        @Override
+        public Participant[] newArray(int size) {
+            return new Participant[size];
+        }
+    };
 }
