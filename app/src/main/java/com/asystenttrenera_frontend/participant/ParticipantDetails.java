@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.asystenttrenera_frontend.R;
 
@@ -14,13 +15,15 @@ public class ParticipantDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participant_details);
+        //String activityTitle = participant.getName() + " " + participant.getSurname();
+        getSupportActionBar().setTitle("Szczegóły zawodnika");
+        //getSupportActionBar().setSubtitle(activityTitle);
 
-
-        EditText addName = findViewById(R.id.addName);
-        EditText addSurname = findViewById(R.id.addSurname);
-        EditText addEmail = findViewById(R.id.addEmail);
-        EditText addYearOfBirth = findViewById(R.id.addYearOfBirth);
-        EditText addPhoneNumber = findViewById(R.id.addPhoneNumber);
+        TextView addName = findViewById(R.id.addName);
+        TextView addSurname = findViewById(R.id.addSurname);
+        TextView addEmail = findViewById(R.id.addEmail);
+        TextView addYearOfBirth = findViewById(R.id.addYearOfBirth);
+        TextView addPhoneNumber = findViewById(R.id.addPhoneNumber);
 
         Intent intent = getIntent();
        // ArrayList<Parcelable> participant = intent.getParcelableArrayListExtra("details");
@@ -32,5 +35,8 @@ public class ParticipantDetails extends AppCompatActivity {
         addEmail.setText(participant.getEmail());
         addYearOfBirth.setText(participant.getYearOfBirth());
         addPhoneNumber.setText(participant.getPhoneNumber());
+
+        participant.getParents();
+        System.out.println("############################ " + participant.getParents().toString());
     }
 }

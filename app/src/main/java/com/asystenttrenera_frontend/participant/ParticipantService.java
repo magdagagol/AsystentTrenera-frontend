@@ -61,16 +61,15 @@ public class ParticipantService {
                                                 p.getString("email"),
                                                 p.getBoolean("contactAgree")
                                         ));
-                                        System.out.println("######################### parent list: " + parentsList.toString());
-                                        participantList.add(new Participant(
-                                                participant.getString("name"),
-                                                participant.getString("surname"),
-                                                participant.getString("yearOfBirth"),
-                                                participant.getString("email"),
-                                                participant.getString("phoneNumber"),
-                                                parentsList
-                                        ));
                                     }
+                                    participantList.add(new Participant(
+                                            participant.getString("name"),
+                                            participant.getString("surname"),
+                                            participant.getString("yearOfBirth"),
+                                            participant.getString("email"),
+                                            participant.getString("phoneNumber"),
+                                            parentsList
+                                    ));
                                 } else {
                                     parentsList.add(new Parent("Nie ma takiego rodzica"));
                                     participantList.add(new Participant(

@@ -26,8 +26,7 @@ public class ParticipantActivity extends AppCompatActivity implements Participan
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.participant_activity);
-
-        //Toast.makeText(this,"This activity works fine ", Toast.LENGTH_LONG).show();
+        getSupportActionBar().setTitle("Lista zawodników");
 
         Intent intent = getIntent();
         participantList = intent.getParcelableArrayListExtra("participants");
