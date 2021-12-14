@@ -33,7 +33,8 @@ public class Participant implements Parcelable {
         this.parents = parents;
     }
 
-    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber) {
+    public Participant(Long id,String name, String surname, String yearOfBirth, String email, String phoneNumber) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;

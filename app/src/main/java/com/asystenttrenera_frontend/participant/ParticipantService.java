@@ -63,6 +63,7 @@ public class ParticipantService {
                                         ));
                                     }
                                     participantList.add(new Participant(
+                                            participant.getLong("id"),
                                             participant.getString("name"),
                                             participant.getString("surname"),
                                             participant.getString("yearOfBirth"),
@@ -73,6 +74,7 @@ public class ParticipantService {
                                 } else {
                                     parentsList.add(new Parent("Nie ma takiego rodzica"));
                                     participantList.add(new Participant(
+                                            participant.getLong("id"),
                                             participant.getString("name"),
                                             participant.getString("surname"),
                                             participant.getString("yearOfBirth"),
