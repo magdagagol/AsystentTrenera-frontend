@@ -1,7 +1,6 @@
 package com.asystenttrenera_frontend.participant;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.asystenttrenera_frontend.MainActivity;
 import com.asystenttrenera_frontend.R;
-import com.asystenttrenera_frontend.zawodnik.ZawodnikAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ParticipantAdapter  extends RecyclerView.Adapter<ParticipantAdapter.ViewHolder> {
     private ArrayList<Participant> participants;

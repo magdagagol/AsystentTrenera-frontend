@@ -10,6 +10,7 @@ import androidx.room.PrimaryKey;
 
 import com.asystenttrenera_frontend.parent.Parent;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,9 +23,9 @@ public class Participant implements Parcelable {
     private String yearOfBirth;
     private String email;
     private String phoneNumber;
-    private List<Parent> parents;
+    private ArrayList<Parent> parents;
 
-    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, List<Parent> parents) {
+    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, ArrayList<Parent> parents) {
         this.name = name;
         this.surname = surname;
         this.yearOfBirth = yearOfBirth;
@@ -42,7 +43,7 @@ public class Participant implements Parcelable {
         this.phoneNumber = phoneNumber;
     }
 
-    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, List<Parent> parents) {
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, ArrayList<Parent> parents) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -113,7 +114,7 @@ public class Participant implements Parcelable {
         return parents;
     }
 
-    public void setParents(List<Parent> parents) {
+    public void setParents(ArrayList<Parent> parents) {
         this.parents = parents;
     }
 

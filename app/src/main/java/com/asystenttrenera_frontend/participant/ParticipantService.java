@@ -47,7 +47,7 @@ public class ParticipantService {
                                 JSONArray parents = participant.getJSONArray("enrolledParents");
 
                                 System.out.println("################################ parent json array list: " + parents.length());
-                                List<Parent> parentsList = new ArrayList<>();
+                                ArrayList<Parent> parentsList = new ArrayList<>();
                                 if(parents.length()>0){
 
                                     for(int j=0; j<parents.length(); j++){
@@ -57,10 +57,11 @@ public class ParticipantService {
                                                 p.getLong("id"),
                                                 p.getString("name"),
                                                 p.getString("surname"),
-                                                p.getInt("phoneNumber"),
+                                                p.getString("phoneNumber"),
                                                 p.getString("email"),
                                                 p.getBoolean("contactAgree")
                                         ));
+                                        System.out.println("1111 " + parentsList.toString());
                                     }
                                     participantList.add(new Participant(
                                             participant.getLong("id"),
@@ -72,14 +73,15 @@ public class ParticipantService {
                                             parentsList
                                     ));
                                 } else {
-                                    parentsList.add(new Parent("Nie ma takiego rodzica"));
+                                    //parentsList.add(new Parent("Nie ma takiego rodzica"));
                                     participantList.add(new Participant(
                                             participant.getLong("id"),
                                             participant.getString("name"),
                                             participant.getString("surname"),
                                             participant.getString("yearOfBirth"),
                                             participant.getString("email"),
-                                            participant.getString("phoneNumber")
+                                            participant.getString("phoneNumber"),
+                                            parentsList
                                     ));
                                 }
                             }

@@ -6,4 +6,10 @@
     <string name="wiadomo_ci">Wiadomości</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="a">a</string>
+    <string name="nazwisko">nazwisko</string>
+    <string name="telefon">telefon</string>
+    <string name="email">email</string>
+    <string name="osoba_do_kontaktu">Osoba do kontaktu:</string>
+    <string name="tak">tak</string>
 </resources>

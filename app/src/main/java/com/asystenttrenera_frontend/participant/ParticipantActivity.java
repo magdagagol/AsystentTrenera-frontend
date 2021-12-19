@@ -2,14 +2,12 @@ package com.asystenttrenera_frontend.participant;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asystenttrenera_frontend.R;
-import com.asystenttrenera_frontend.zawodnik.ZawodnikAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -42,14 +40,6 @@ public class ParticipantActivity extends AppCompatActivity implements Participan
         recyclerView.setAdapter(adapter);
 
         addParticipant = findViewById(R.id.addParticipant);
-
-        //addParticipant.setOnClickListener(new View.OnClickListener() {
-        //    @Override
-        //    public void onClick(View view) {
-        //        Intent intent = new Intent(ParticipantActivity.this, ParticipantDetails.class);
-        //        startActivity(intent);
-        //    }
-        //});
 
     }
 

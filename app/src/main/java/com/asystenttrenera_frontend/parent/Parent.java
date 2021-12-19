@@ -1,27 +1,18 @@
 package com.asystenttrenera_frontend.parent;
 
+
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import com.asystenttrenera_frontend.participant.Participant;
-import com.asystenttrenera_frontend.participant.ParticipantAdapter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class Parent implements Parcelable {
     private Long id;
     private String name;
     private String surname;
-    private Integer phoneNumber;
+    private String phoneNumber;
     private String email;
     private Boolean contactAgree;
 
-    public Parent(String name) {
-        this.name = name;
-    }
-
-    public Parent(Long id, String name, String surname, Integer phoneNumber, String email, Boolean contactAgree) {
+    public Parent(Long id, String name, String surname, String phoneNumber, String email, Boolean contactAgree) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -30,20 +21,20 @@ public class Parent implements Parcelable {
         this.contactAgree = contactAgree;
     }
 
-    @Override
-    public String toString() {
-        return "Parent{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", phoneNumber=" + phoneNumber +
-                ", email='" + email + '\'' +
-                ", contactAgree=" + contactAgree +
-                '}';
+    public Parent(String name, String surname, String phoneNumber, String email, Boolean contactAgree) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.contactAgree = contactAgree;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -62,11 +53,11 @@ public class Parent implements Parcelable {
         this.surname = surname;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
@@ -96,7 +87,7 @@ public class Parent implements Parcelable {
         dest.writeValue(this.id);
         dest.writeString(this.name);
         dest.writeString(this.surname);
-        dest.writeValue(this.phoneNumber);
+        dest.writeString(this.phoneNumber);
         dest.writeString(this.email);
         dest.writeValue(this.contactAgree);
     }
@@ -105,7 +96,7 @@ public class Parent implements Parcelable {
         this.id = (Long) source.readValue(Long.class.getClassLoader());
         this.name = source.readString();
         this.surname = source.readString();
-        this.phoneNumber = (Integer) source.readValue(Integer.class.getClassLoader());
+        this.phoneNumber = source.readString();
         this.email = source.readString();
         this.contactAgree = (Boolean) source.readValue(Boolean.class.getClassLoader());
     }
@@ -114,12 +105,12 @@ public class Parent implements Parcelable {
         this.id = (Long) in.readValue(Long.class.getClassLoader());
         this.name = in.readString();
         this.surname = in.readString();
-        this.phoneNumber = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.phoneNumber = in.readString();
         this.email = in.readString();
         this.contactAgree = (Boolean) in.readValue(Boolean.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Parent> CREATOR = new Parcelable.Creator<Parent>() {
+    public static final Creator<Parent> CREATOR = new Creator<Parent>() {
         @Override
         public Parent createFromParcel(Parcel source) {
             return new Parent(source);

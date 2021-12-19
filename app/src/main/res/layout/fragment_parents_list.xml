@@ -32,10 +32,16 @@
                 android:text="Rodzice/opikunowie"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
         </LinearLayout>
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/parentRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <Button
-            android:id="@+id/button"
+            android:id="@+id/buttonAddParent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
@@ -44,6 +50,7 @@
             android:layout_marginBottom="5dp"
             android:text="Dodaj rodzica/opiekuna"
             app:icon="@drawable/add" />
+
     </LinearLayout>
 
 </FrameLayout>
