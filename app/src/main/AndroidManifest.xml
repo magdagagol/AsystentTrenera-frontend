@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AsystentTrenerafrontend"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".group.GroupsActivity"
+            android:exported="false" />
+        <activity
             android:name=".participant.ParticipantDetails"
             android:exported="false" />
         <activity android:name=".zawodnik.EdytujZawodnika" />
@@ -22,7 +25,8 @@
         <activity android:name=".zawodnik.ZawodnikDetails" />
         <activity android:name=".zawodnik.ZawodnikActivity" />
         <activity android:name=".participant.ParticipantActivity" />
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

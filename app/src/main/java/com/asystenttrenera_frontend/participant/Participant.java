@@ -1,20 +1,13 @@
 package com.asystenttrenera_frontend.participant;
 
-import android.icu.util.IslamicCalendar;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.view.Display;
-
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
 
 import com.asystenttrenera_frontend.parent.Parent;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 public class Participant implements Parcelable {
     private Long id;
@@ -24,6 +17,13 @@ public class Participant implements Parcelable {
     private String email;
     private String phoneNumber;
     private ArrayList<Parent> parents;
+
+    public Participant(Long id, String name, String surname, String yearOfBirth) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
+    }
 
     public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, ArrayList<Parent> parents) {
         this.name = name;

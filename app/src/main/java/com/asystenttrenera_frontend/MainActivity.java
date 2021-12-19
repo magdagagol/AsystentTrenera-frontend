@@ -14,6 +14,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
+import com.asystenttrenera_frontend.group.Group;
+import com.asystenttrenera_frontend.group.GroupService;
+import com.asystenttrenera_frontend.group.GroupsActivity;
 import com.asystenttrenera_frontend.participant.MySingleton;
 import com.asystenttrenera_frontend.participant.Participant;
 import com.asystenttrenera_frontend.participant.ParticipantActivity;
@@ -29,6 +32,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button btnZawodnicy;
+    Button btnGroups;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         btnZawodnicy = findViewById(R.id.btnParticipants);
+        btnGroups = findViewById(R.id.btnGroups);
 
         btnZawodnicy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,12 +59,32 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this, ParticipantActivity.class);
                         intent.putExtra("participants", response);
                         startActivity(intent);
-
                     }
                 });
             }
         });
 
+        btnGroups.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GroupService groupService = new GroupService(MainActivity.this);
+                groupService.groupsObject(new GroupService.VolleyResponseListener() {
+                    @Override
+                    public void onError(String message) {
+                        Toast.makeText(MainActivity.this,"Something wrong", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onResponse(ArrayList<Group> response) {
+                        Intent intent = new Intent(MainActivity.this, GroupsActivity.class);
+                        intent.putExtra("groups", response);
+                        startActivity(intent);
+                    }
+                });
+
+
+            }
+        });
     }
 
 }
