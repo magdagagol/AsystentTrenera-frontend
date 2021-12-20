@@ -1,6 +1,8 @@
 package com.asystenttrenera_frontend.group;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,17 +17,30 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.AddGroupDialogListener {
+public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.AddGroupDialogListener, GroupAdapter.ItemClicked {
     private FloatingActionButton addGroup;
 
+    RecyclerView recyclerView;
+    RecyclerView.Adapter adapter;
+    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
 
+        recyclerView = findViewById(R.id.groupsList);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
         Intent intent = getIntent();
         ArrayList<Group> groupArrayList = intent.getParcelableArrayListExtra("groups");
+        System.out.println("GGGGGGGGGGGGGGGGGGG " + groupArrayList.get(0).getId());
+
+        adapter = new GroupAdapter(this, groupArrayList);
+        recyclerView.setAdapter(adapter);
+
+
 
         Toast.makeText(GroupsActivity.this, "groups form main activity: " + groupArrayList.get(1).getId(), Toast.LENGTH_SHORT).show();
 
@@ -47,10 +62,13 @@ public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.
 
     @Override
     public void applyText(String groupName) {
-        System.out.println("group name #############################: " + groupName);
         GroupService groupService = new GroupService(this);
-        System.out.println("group service: " + groupService.getGroupName(groupName).toString());
         JSONObject object = groupService.getGroupName(groupName);
         groupService.postGroupObject(object);
+    }
+
+    @Override
+    public void onItemClicked(int index) {
+        Toast.makeText(this, "aaaaa", Toast.LENGTH_SHORT).show();
     }
 }
