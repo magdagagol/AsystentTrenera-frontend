@@ -18,9 +18,6 @@
             android:name=".group.AddParticipants"
             android:exported="false" />
         <activity
-            android:name=".add_participant_to_group_item"
-            android:exported="false" />
-        <activity
             android:name=".group.GroupDetails"
             android:exported="false" />
         <activity

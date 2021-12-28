@@ -25,7 +25,7 @@ import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class GroupDetails extends AppCompatActivity implements AddParticipantsToGroupDialog.AddGroupDialogListener {
+public class GroupDetails extends AppCompatActivity {
 
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
@@ -63,53 +63,23 @@ public class GroupDetails extends AppCompatActivity implements AddParticipantsTo
         FloatingActionButton addParticipantsFB;
 
         Intent intent = getIntent();
-        String groupName = intent.getStringExtra("groupName");
-        participants = intent.getParcelableArrayListExtra("praticipants");
+        Group group = (Group) intent.getParcelableExtra("group");
 
-        Group p = (Group) intent.getParcelableExtra("test1");
-        System.out.println("PPPPPPPPPPPPPPPPPPPPPPPPPP " + p.getParticipants().get(0).getName());
+        participants = group.getParticipants();
+        getSupportActionBar().setTitle(group.getName());
+
+        adapter = new ParticipantForGroupAdapter(participants);
+        recyclerView.setAdapter(adapter);
 
         addParticipantsFB = findViewById(R.id.addParticipantsFB);
 
         addParticipantsFB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialog();
+                Intent newIntent = new Intent(GroupDetails.this, AddParticipants.class);
+                startActivity(newIntent);
             }
         });
 
-
-
-
-
-
-
-        /* TODO:
-        jeżeli nie ma activity nie wyświetla komunikatu,
-        wyświetla inne istniejące activity
-         */
-        Bundle bundle = intent.getExtras();
-
-        Group test123 = (Group)bundle.getSerializable("test123");
-        System.out.println("test123 " + test123.getParticipants().get(0).getName());
-        Toast.makeText(this, "test123 " + test123, Toast.LENGTH_SHORT).show();
-
-
-        System.out.println("participants" + participants);
-        getSupportActionBar().setTitle(groupName);
-
-        adapter = new ParticipantForGroupAdapter(participants);
-        recyclerView.setAdapter(adapter);
-
-    }
-
-    private void openDialog() {
-        AddParticipantsToGroupDialog addDialog = new AddParticipantsToGroupDialog();
-        addDialog.show(getSupportFragmentManager(), "Dodaj");
-    }
-
-    @Override
-    public void applyText(String groupName) {
-        System.out.println(groupName);
     }
 }

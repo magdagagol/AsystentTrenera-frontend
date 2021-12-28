@@ -43,10 +43,6 @@ public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.
         adapter = new GroupAdapter(this, groupArrayList);
         recyclerView.setAdapter(adapter);
 
-
-
-        Toast.makeText(GroupsActivity.this, "groups form main activity: " + groupArrayList.get(1).getId(), Toast.LENGTH_SHORT).show();
-
         addGroup = findViewById(R.id.addGroup);
 
         addGroup.setOnClickListener(new View.OnClickListener() {
@@ -72,22 +68,9 @@ public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.
 
     @Override
     public void onItemClicked(int index) {
-        Toast.makeText(this, "aaaaa" + groupArrayList.get(index).getParticipants() + "# " + groupArrayList.get(index).getId(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, GroupDetails.class);
 
-        String groupName = groupArrayList.get(index).getName();
-        intent.putExtra("groupName", groupName);
-
-        intent.putExtra("praticipants",groupArrayList.get(index).getParticipants());
-        System.out.println("Groups activity  ********************************************* " +groupArrayList.get(index).getId());
-        System.out.println("Groups activity  ********************************************* " +groupArrayList.get(index).getName());
-        System.out.println("Groups activity  ********************************************* " + groupArrayList.get(index).getParticipants().toString());
-
-        intent.putExtra("test1", (Parcelable) groupArrayList.get(index));
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("test123", groupArrayList.get(index));
-        intent.putExtras(bundle);
-
+        intent.putExtra("group", (Parcelable) groupArrayList.get(index));
         startActivity(intent);
     }
 }
