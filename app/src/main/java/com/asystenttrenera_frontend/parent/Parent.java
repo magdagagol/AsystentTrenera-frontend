@@ -4,7 +4,9 @@ package com.asystenttrenera_frontend.parent;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Parent implements Parcelable {
+import java.io.Serializable;
+
+public class Parent implements Parcelable, Serializable {
     private Long id;
     private String name;
     private String surname;

@@ -3,8 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3927083333333333" />
+        <entry key="app/src/main/res/drawable/add.xml" value="0.3927083333333333" />
+        <entry key="app/src/main/res/drawable/add_circle.xml" value="0.3927083333333333" />
+        <entry key="app/src/main/res/drawable/baseline_cake.xml" value="0.3927083333333333" />
+        <entry key="app/src/main/res/drawable/group.xml" value="0.3927083333333333" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3927083333333333" />
         <entry key="app/src/main/res/layout/activity_add_participant.xml" value="0.562208398133748" />
+        <entry key="app/src/main/res/layout/activity_add_participant_to_group_item.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_dodaj_zawodnika.xml" value="0.209375" />
+        <entry key="app/src/main/res/layout/activity_group_details.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/activity_groups.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37623762376237624" />
         <entry key="app/src/main/res/layout/activity_participant.xml" value="0.5" />
@@ -15,11 +23,15 @@
         <entry key="app/src/main/res/layout/fragment_parents_list.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/groups_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/layout_add_group_dialog.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/layout_add_oarticipants_to_group.xml" value="0.36041666666666666" />
+        <entry key="app/src/main/res/layout/layout_add_oarticipants_to_group_dialog.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/list_items.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/parent_item.xml" value="0.37447916666666664" />
         <entry key="app/src/main/res/layout/participant_activity.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/participant_for_group_item.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/participants_activity.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/participants_item.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/participant_in_group_details.xml" value="0.3765625" />
       </map>
     </option>
   </component>
@@ -28,5 +40,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.36041666666666666" />
+      </ProjectState>
+    </option>
   </component>
 </project>

@@ -6,9 +6,10 @@ import android.os.Parcelable;
 
 import com.asystenttrenera_frontend.participant.Participant;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Group implements Parcelable {
+public class Group implements Parcelable, Serializable {
     private Long id;
     private String name;
     private ArrayList<Participant> participants;
@@ -49,12 +50,14 @@ public class Group implements Parcelable {
         dest.writeValue(this.id);
         dest.writeString(this.name);
         dest.writeTypedList(this.participants);
+        //dest.writeSerializable(this.participants);
     }
 
     public void readFromParcel(Parcel source) {
         this.id = (Long) source.readValue(Long.class.getClassLoader());
         this.name = source.readString();
         this.participants = source.createTypedArrayList(Participant.CREATOR);
+        //this.participants = (ArrayList<Participant>) source.readSerializable();
     }
 
     protected Group(Parcel in) {

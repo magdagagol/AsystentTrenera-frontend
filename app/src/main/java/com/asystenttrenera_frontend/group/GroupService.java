@@ -46,10 +46,11 @@ public class GroupService {
                             ArrayList<Participant> participants = new ArrayList<>();
                             for(int i=0; i< response.length(); i++){
                                 JSONObject object = response.getJSONObject(i);
-
+                                System.out.println("response.getJSONObject(i)" + response.getJSONObject(i));
                                 JSONArray array = object.getJSONArray("participants");
+                                System.out.println("object.getJSONArray(\"participants\")" + object.getJSONArray("participants"));
                                 for(int j=0; j<array.length(); j++){
-                                    System.out.println(array.getJSONObject(j).getLong("id"));
+                                    System.out.println("Group service participants j" + array.getJSONObject(j).getLong("id"));
                                     participants.add(new Participant(
                                             array.getJSONObject(j).getLong("id"),
                                             array.getJSONObject(j).getString("name"),
@@ -63,6 +64,8 @@ public class GroupService {
                                         object.getString("name"),
                                         participants
                                 ));
+
+                                System.out.println("Group service test: " + groupArrayList.get(0).getParticipants());
 
                             }
                         } catch (JSONException e) {

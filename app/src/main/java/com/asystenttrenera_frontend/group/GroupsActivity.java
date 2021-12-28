@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,19 +24,21 @@ public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
+    ArrayList<Group> groupArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_groups);
 
+        getSupportActionBar().setTitle("Grupy");
+
         recyclerView = findViewById(R.id.groupsList);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         Intent intent = getIntent();
-        ArrayList<Group> groupArrayList = intent.getParcelableArrayListExtra("groups");
-        System.out.println("GGGGGGGGGGGGGGGGGGG " + groupArrayList.get(0).getId());
+        groupArrayList = intent.getParcelableArrayListExtra("groups");
 
         adapter = new GroupAdapter(this, groupArrayList);
         recyclerView.setAdapter(adapter);
@@ -69,6 +72,22 @@ public class GroupsActivity extends AppCompatActivity implements AddGroupDialog.
 
     @Override
     public void onItemClicked(int index) {
-        Toast.makeText(this, "aaaaa", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "aaaaa" + groupArrayList.get(index).getParticipants() + "# " + groupArrayList.get(index).getId(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, GroupDetails.class);
+
+        String groupName = groupArrayList.get(index).getName();
+        intent.putExtra("groupName", groupName);
+
+        intent.putExtra("praticipants",groupArrayList.get(index).getParticipants());
+        System.out.println("Groups activity  ********************************************* " +groupArrayList.get(index).getId());
+        System.out.println("Groups activity  ********************************************* " +groupArrayList.get(index).getName());
+        System.out.println("Groups activity  ********************************************* " + groupArrayList.get(index).getParticipants().toString());
+
+        intent.putExtra("test1", (Parcelable) groupArrayList.get(index));
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("test123", groupArrayList.get(index));
+        intent.putExtras(bundle);
+
+        startActivity(intent);
     }
 }
