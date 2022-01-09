@@ -25,7 +25,12 @@ public class EditGroupDialog extends AppCompatDialogFragment {
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.layout_edit_group_dialog, null);
         EditText editText = view.findViewById(R.id.editGroupBtn);
-        editText.setText("zamiana");
+
+        Bundle bundle = getArguments();
+        String name = bundle.getString("groupName","");
+        editText.setHint(name);
+
+        Long id = bundle.getLong("groupId");
 
         builder.setView(view)
                 .setTitle("Edytuj nazwę grupy")
@@ -39,7 +44,8 @@ public class EditGroupDialog extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String getGroupName = groupName.getText().toString();
-                        addGroupDialogListener.applyText(getGroupName);
+                        addGroupDialogListener.applyText(getGroupName, id);
+
                     }
                 });
         groupName = view.findViewById(R.id.editGroupBtn);
@@ -59,7 +65,7 @@ public class EditGroupDialog extends AppCompatDialogFragment {
     }
 
     public interface AddGroupDialogListener {
-        void applyText(String groupName);
+        void applyText(String groupName, Long id);
     }
 
 }

@@ -48,7 +48,6 @@ public class GroupService {
                                 JSONObject object = response.getJSONObject(i);
                                 System.out.println("response.getJSONObject(i)" + response.getJSONObject(i));
                                 JSONArray array = object.getJSONArray("participants");
-                                System.out.println("object.getJSONArray(\"participants\")" + object.getJSONArray("participants"));
                                 for(int j=0; j<array.length(); j++){
                                     System.out.println("Group service participants j" + array.getJSONObject(j).getLong("id"));
                                     participants.add(new Participant(
@@ -111,20 +110,9 @@ public class GroupService {
     }
 
     //PUT
-    public JSONObject getGroup(String g){
-        JSONObject jsonObject= new JSONObject();
-        try {
-            jsonObject.put("name", g);
-            return jsonObject;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return jsonObject;
-    }
-// wymaga id
-    public void putGroupObject(JSONObject object){
+    public void putGroupObject(Long id, JSONObject object){
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.PUT, QUERY_FOR_GROUPS, object, new Response.Listener<JSONObject>() {
+                (Request.Method.PUT, QUERY_FOR_GROUPS +"/"+ id, object, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());

@@ -40,13 +40,12 @@ public class GroupDetails extends AppCompatActivity implements EditGroupDialog.A
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit:
-                Toast.makeText(this, "Edytuj"+ group.getId(), Toast.LENGTH_SHORT).show();
-                openDialog();
+                openDialog(group);
                 break;
             case R.id.delete:
                 GroupService groupService = new GroupService(this);
                 groupService.deleteGroupObject(group.getId());
-                Toast.makeText(this, "Grupa została usunięta, widok nie odświeża się automatycznie", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Grupa została usunięta", Toast.LENGTH_SHORT).show();
                 adapter.notifyDataSetChanged();
                 break;
         }
@@ -86,15 +85,21 @@ public class GroupDetails extends AppCompatActivity implements EditGroupDialog.A
 
     }
 
-   private void openDialog() {
+   private void openDialog(Group group) {
         EditGroupDialog editGroupDialog = new EditGroupDialog();
+        Bundle bundle = new Bundle();
+        bundle.putString("groupName", group.getName());
+        bundle.putLong("groupId", group.getId());
+        editGroupDialog.setArguments(bundle);
         editGroupDialog.show(getSupportFragmentManager(), "Edytuj");
     }
 
     @Override
-    public void applyText(String groupName) {
+    public void applyText(String groupName, Long id){
         GroupService groupService = new GroupService(this);
         JSONObject object = groupService.getGroupName(groupName);
-        groupService.putGroupObject(object);
+        groupService.putGroupObject(id, object);
+
+        Toast.makeText(this, "Nazwa grupy została zmieniona", Toast.LENGTH_SHORT).show();
     }
 }
