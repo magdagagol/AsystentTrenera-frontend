@@ -25,6 +25,14 @@ public class Participant implements Parcelable {
         this.yearOfBirth = yearOfBirth;
     }
 
+    public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber) {
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+
     public Participant(String name, String surname, String yearOfBirth, String email, String phoneNumber, ArrayList<Parent> parents) {
         this.name = name;
         this.surname = surname;

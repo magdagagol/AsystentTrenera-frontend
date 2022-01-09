@@ -2,6 +2,7 @@ package com.asystenttrenera_frontend.participant;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,6 +41,14 @@ public class ParticipantActivity extends AppCompatActivity implements Participan
         recyclerView.setAdapter(adapter);
 
         addParticipant = findViewById(R.id.addParticipant);
+
+        addParticipant.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent in = new Intent(ParticipantActivity.this, AddParticipant.class);
+                startActivity(in);
+            }
+        });
 
     }
 
