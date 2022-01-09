@@ -14,8 +14,8 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="191dp"
         android:ems="10"
-        android:hint="Nazwa grupy"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

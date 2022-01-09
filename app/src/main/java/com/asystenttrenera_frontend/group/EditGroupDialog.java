@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.asystenttrenera_frontend.R;
 
-public class AddGroupDialog extends AppCompatDialogFragment {
+public class EditGroupDialog extends AppCompatDialogFragment {
     private EditText groupName;
     private AddGroupDialogListener addGroupDialogListener;
 
@@ -23,10 +23,12 @@ public class AddGroupDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.layout_add_group_dialog, null);
+        View view = layoutInflater.inflate(R.layout.layout_edit_group_dialog, null);
+        EditText editText = view.findViewById(R.id.editGroupBtn);
+        editText.setText("zamiana");
 
         builder.setView(view)
-                .setTitle("Dodaj grupę")
+                .setTitle("Edytuj nazwę grupy")
                 .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

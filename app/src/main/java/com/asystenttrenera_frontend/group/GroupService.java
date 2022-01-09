@@ -99,7 +99,51 @@ public class GroupService {
                 (Request.Method.POST, QUERY_FOR_GROUPS, object, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(context, "Nowa grupa została utworzona", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, response.toString());
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    }
+                });
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    //PUT
+    public JSONObject getGroup(String g){
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("name", g);
+            return jsonObject;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+// wymaga id
+    public void putGroupObject(JSONObject object){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.PUT, QUERY_FOR_GROUPS, object, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    }
+                });
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    //DELETE
+    public void deleteGroupObject(Long id){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.DELETE, QUERY_FOR_GROUPS +"/"+ id, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                     }
                 }, new Response.ErrorListener() {

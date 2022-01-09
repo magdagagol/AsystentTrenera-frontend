@@ -7,30 +7,27 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.asystenttrenera_frontend.R;
 import com.asystenttrenera_frontend.participant.Participant;
-import com.asystenttrenera_frontend.participant.ParticipantAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONObject;
 
-import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class GroupDetails extends AppCompatActivity {
-
+public class GroupDetails extends AppCompatActivity implements EditGroupDialog.AddGroupDialogListener {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
     ArrayList<Participant> participants;
+    Group group;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,14 +40,20 @@ public class GroupDetails extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.edit:
-                Toast.makeText(this, "Edytuj", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Edytuj"+ group.getId(), Toast.LENGTH_SHORT).show();
+                openDialog();
                 break;
             case R.id.delete:
-                Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
+                GroupService groupService = new GroupService(this);
+                groupService.deleteGroupObject(group.getId());
+                Toast.makeText(this, "Grupa została usunięta, widok nie odświeża się automatycznie", Toast.LENGTH_SHORT).show();
+                adapter.notifyDataSetChanged();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +66,7 @@ public class GroupDetails extends AppCompatActivity {
         FloatingActionButton addParticipantsFB;
 
         Intent intent = getIntent();
-        Group group = (Group) intent.getParcelableExtra("group");
+        group = (Group) intent.getParcelableExtra("group");
 
         participants = group.getParticipants();
         getSupportActionBar().setTitle(group.getName());
@@ -81,5 +84,17 @@ public class GroupDetails extends AppCompatActivity {
             }
         });
 
+    }
+
+   private void openDialog() {
+        EditGroupDialog editGroupDialog = new EditGroupDialog();
+        editGroupDialog.show(getSupportFragmentManager(), "Edytuj");
+    }
+
+    @Override
+    public void applyText(String groupName) {
+        GroupService groupService = new GroupService(this);
+        JSONObject object = groupService.getGroupName(groupName);
+        groupService.putGroupObject(object);
     }
 }
