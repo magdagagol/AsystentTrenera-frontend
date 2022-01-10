@@ -52,8 +52,6 @@ public class GroupDetails extends AppCompatActivity implements EditGroupDialog.A
         return super.onOptionsItemSelected(item);
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

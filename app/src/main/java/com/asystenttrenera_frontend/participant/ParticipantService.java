@@ -137,4 +137,22 @@ public class ParticipantService {
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
 
     }
+
+    //DELETE
+    public void deleteGroupObject(Long id){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.DELETE, QUERY_FOR_PARTICIPANTS +"/"+ id, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    }
+                });
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
 }

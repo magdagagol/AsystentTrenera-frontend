@@ -1,5 +1,6 @@
 package com.asystenttrenera_frontend.participant;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,12 +8,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.asystenttrenera_frontend.R;
+import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.parent.Parent;
 import com.asystenttrenera_frontend.parent.ParentAdapter;
 import com.asystenttrenera_frontend.parent.ParentsListFrag;
@@ -21,6 +27,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParticipantDetails extends AppCompatActivity {
+    Participant participant;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.participant_details, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.edit:
+                //openDialog(group);
+                Toast.makeText(this, "Edycja zawodnika", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.delete:
+                ParticipantService participantService = new ParticipantService(this);
+                participantService.deleteGroupObject(participant.getId());
+                Toast.makeText(this, "Zawodnik został usunięty", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +81,7 @@ public class ParticipantDetails extends AppCompatActivity {
         Intent intent = getIntent();
        // ArrayList<Parcelable> participant = intent.getParcelableArrayListExtra("details");
 
-        Participant participant = intent.getParcelableExtra("details");
+        participant = intent.getParcelableExtra("details");
 
         addName.setText(participant.getName());
         addSurname.setText(participant.getSurname());
@@ -63,14 +93,8 @@ public class ParticipantDetails extends AppCompatActivity {
         ArrayList<Parent> parentArrayList = new ArrayList<>();
         parentArrayList.addAll(p);
 
-
-
-        System.out.println("############################ parent details" + participant.getParents().toString());
-        System.out.println("############################ parent details list" + p.toString());
-
         Bundle bundle = new Bundle();
         ArrayList<Parent> parent = (ArrayList<Parent>) participant.getParents();
-        System.out.println("########## array list parents form participant details " + parentArrayList.get(0).getName());
         //bundle.putParcelableArrayList("parent", parent);
 
        bundle.putString("test", "444444444444444444444444From Activity");
