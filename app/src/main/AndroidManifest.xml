@@ -15,6 +15,9 @@
         android:theme="@style/Theme.AsystentTrenerafrontend"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".message.MessageActivity"
+            android:exported="false" />
+        <activity
             android:name=".participant.AddParticipant"
             android:exported="false" />
         <activity

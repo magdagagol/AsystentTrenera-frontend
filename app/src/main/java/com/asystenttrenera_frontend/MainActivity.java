@@ -8,31 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.asystenttrenera_frontend.group.Group;
 import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.group.GroupsActivity;
-import com.asystenttrenera_frontend.participant.MySingleton;
+import com.asystenttrenera_frontend.message.MessageActivity;
 import com.asystenttrenera_frontend.participant.Participant;
 import com.asystenttrenera_frontend.participant.ParticipantActivity;
 import com.asystenttrenera_frontend.participant.ParticipantService;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button btnZawodnicy;
     Button btnGroups;
+    private Button btnMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
         btnZawodnicy = findViewById(R.id.btnParticipants);
         btnGroups = findViewById(R.id.btnGroups);
+        btnMessage = findViewById(R.id.btnMessages);
 
         btnZawodnicy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
+            }
+        });
+
+        btnMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MessageActivity.class);
+                startActivity(intent);
             }
         });
     }

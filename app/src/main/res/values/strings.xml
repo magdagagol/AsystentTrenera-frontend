@@ -12,4 +12,11 @@
     <string name="email">email</string>
     <string name="osoba_do_kontaktu">Osoba do kontaktu:</string>
     <string name="tak">tak</string>
+    <string name="pick_time">Wybierz godzinę</string>
+    <string name="pick_date">Wybierz datę</string>
+
+    <string-array name="choose">
+        <item>Do zawodnika</item>
+        <item>Do grupy</item>
+    </string-array>
 </resources>
