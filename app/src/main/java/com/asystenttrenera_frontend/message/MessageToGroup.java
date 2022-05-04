@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,6 +24,9 @@ import java.util.ArrayList;
 public class MessageToGroup extends Fragment {
     ArrayList<Group> groups;
     GroupAdapter groupAdapter;
+    CheckBox checkBoxParticipants, checkBoxParents, checkBoxAll;
+    Button saveMessageToGroup;
+    String checked;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -33,6 +38,11 @@ public class MessageToGroup extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_message_to_group, container, false);
 
+        checkBoxParticipants = view.findViewById(R.id.checkBoxParticipant);
+        checkBoxParents = view.findViewById(R.id.checkBoxParents);
+        checkBoxAll = view.findViewById(R.id.checkBoxAll);
+
+        saveMessageToGroup = view.findViewById(R.id.saveMessageToGroup);
         GroupService groupService = new GroupService(getActivity().getApplicationContext());
         groupService.groupsObject(new GroupService.VolleyResponseListener() {
             @Override
@@ -51,7 +61,32 @@ public class MessageToGroup extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         Group group = (Group) adapterView.getItemAtPosition(i);
-                        Toast.makeText(getActivity(), "Spinner works with: " + group.getId(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Spinner works with: " + group.getParticipants(), Toast.LENGTH_SHORT).show();
+                        saveMessageToGroup.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                Spinner spinner = (Spinner) view.findViewById(R.id.spinner2);
+                                String text = group.getParticipants().toString();
+                                System.out.println("############################## " + text);
+                                if(checkBoxParents.isChecked()){
+                                    //checkBoxParents.setChecked(true);
+                                    checkBoxParticipants.setChecked(false);
+                                    checkBoxAll.setChecked(false);
+                                    checked = "parents";
+                                } else if (checkBoxParticipants.isChecked()){
+                                    checkBoxParents.setChecked(false);
+                                    //checkBoxParticipants.setChecked(false);
+                                    checkBoxAll.setChecked(false);
+                                    checked = "participants";
+                                } else if (checkBoxAll.isChecked()){
+                                    checkBoxParents.setChecked(false);
+                                    checkBoxParticipants.setChecked(false);
+                                    // checkBoxAll.setChecked(false);
+                                    checked = "all";
+                                }
+                            }
+                        });
                     }
 
                     @Override
@@ -61,6 +96,7 @@ public class MessageToGroup extends Fragment {
                 });
             }
         });
+
         return view;
     }
 }

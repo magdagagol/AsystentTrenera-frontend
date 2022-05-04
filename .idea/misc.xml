@@ -17,12 +17,13 @@
         <entry key="app/src/main/res/layout/activity_group_spinner_row.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/activity_groups.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37623762376237624" />
-        <entry key="app/src/main/res/layout/activity_message.xml" value="0.4836692147324531" />
+        <entry key="app/src/main/res/layout/activity_message.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_participant.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_participant_details.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/activity_zawodnik_details.xml" value="0.20989583333333334" />
+        <entry key="app/src/main/res/layout/custom_spinner_participant_adapter.xml" value="0.14915254237288136" />
         <entry key="app/src/main/res/layout/fragment_message_to_group.xml" value="0.3765625" />
-        <entry key="app/src/main/res/layout/fragment_message_to_participant.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/fragment_message_to_participant.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_parent_list.xml" value="0.20989583333333334" />
         <entry key="app/src/main/res/layout/fragment_parent_list2.xml" value="0.20989583333333334" />
         <entry key="app/src/main/res/layout/fragment_parents_list.xml" value="0.3765625" />

@@ -6,9 +6,32 @@
     tools:context=".message.MessageToParticipant">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
+
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:hint="Wybierz zawodnika"/>
+
+        <EditText
+            android:id="@+id/messageToParticipant"
+            android:layout_width="match_parent"
+            android:layout_height="158dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:hint="Dodaj tekst wiadomości"/>
+
+        <Button
+            android:id="@+id/saveMessageToParticipant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Zapisz" />
+
+    </LinearLayout>
 
 </FrameLayout>
