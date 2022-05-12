@@ -9,14 +9,17 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.icu.text.TimeZoneFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,10 +30,12 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.asystenttrenera_frontend.R;
-import com.google.android.material.timepicker.TimeFormat;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class MessageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
    private int STORAGE_PERMISSION_CODE = 1;
@@ -52,7 +57,7 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
 
         if(ContextCompat.checkSelfPermission( MessageActivity.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
             try {
-                Toast.makeText(MessageActivity.this, "Message is sent", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MessageActivity.this, "Message is sent", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 Toast.makeText(MessageActivity.this, "Fail sent message", Toast.LENGTH_SHORT).show();
             }
@@ -141,8 +146,8 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
         Fragment messageToGroup;
 
         String text = adapterView.getItemAtPosition(i).toString();
-        Toast.makeText(this, "Spinner works with: " + text, Toast.LENGTH_SHORT).show();
 
+        Log.i("message", "information from message activity");
         messageToParticipant = new MessageToParticipant();
         messageToGroup = new MessageToGroup();
 
@@ -155,7 +160,6 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
                     .replace(R.id.message_to, messageToGroup)
                     .commit();
         }
-
     }
 
     @Override
@@ -163,14 +167,22 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
-    public String getCurrentDate(){
+    public Date getCurrentDateAndTime(){
         TextView date = findViewById(R.id.datePickerTV);
-        return (String) date.getText();
-    }
-
-    public String getCurrentTime(){
         TextView time = findViewById(R.id.dateTimePickerTV);
-        return (String) time.getText();
+
+        String dtStart = (String) date.getText() + " " + time.getText();
+
+        SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss aa");
+        Date date2 = null;
+        try {
+            date2 = format.parse(dtStart);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        System.out.println(date2);
+        return date2;
     }
 }
 

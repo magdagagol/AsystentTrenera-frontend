@@ -1,14 +1,13 @@
 package com.asystenttrenera_frontend.message;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +15,14 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import com.asystenttrenera_frontend.MainActivity;
 import com.asystenttrenera_frontend.R;
 import com.asystenttrenera_frontend.participant.Participant;
 import com.asystenttrenera_frontend.participant.ParticipantService;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MessageToParticipant extends Fragment {
     ArrayList<Participant> participants;
@@ -43,8 +42,6 @@ public class MessageToParticipant extends Fragment {
         saveButton = view.findViewById(R.id.saveMessageToParticipant);
         message = view.findViewById(R.id.messageToParticipant);
 
-
-
         ParticipantService participantService = new ParticipantService(getActivity().getApplicationContext());
         participantService.participantsObject(new ParticipantService.VolleyResponseListener() {
             @Override
@@ -63,32 +60,18 @@ public class MessageToParticipant extends Fragment {
                 spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        //Toast.makeText(getActivity(), participants.get(i).getPhoneNumber(), Toast.LENGTH_SHORT).show();
-
                         saveButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                System.out.println("############################# Participant: " + participants.get(i).getPhoneNumber());
-                                System.out.println("############################# Message: " + message.getText());
+                                MessageActivity messageActivity = (MessageActivity) getActivity();
+                                Date dateAndTime = messageActivity.getCurrentDateAndTime();
+                                Calendar calender = Calendar.getInstance();
+                                calender.setTime(dateAndTime);
 
-                                MessageActivity a = (MessageActivity) getActivity();
-                                System.out.println("############################# Date: " + a.getCurrentDate());
-                                System.out.println("############################# Time: " + a.getCurrentTime());
+                                String phone = participants.get(i).getPhoneNumber();
+                                String text = String.valueOf(message.getText());
 
-                               // if(ActivityCompat.checkSelfPermission( getContext(), Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
-                               //     try {
-                               //         SmsManager smsManager = SmsManager.getDefault();
-                               //         smsManager.sendTextMessage(participants.get(i).getPhoneNumber(), null, String.valueOf(message.getText()), null, null);
-                               //         Toast.makeText(a, "Message is sent", Toast.LENGTH_SHORT).show();
-                               //     } catch (Exception e) {
-                               //         Toast.makeText(a, "Fail sent message", Toast.LENGTH_SHORT).show();
-                               //     }
-//
-                               // } else System.out.println("########################## permission not working");
-                                SmsManager smsManager = SmsManager.getDefault();
-                                smsManager.sendTextMessage(participants.get(i).getPhoneNumber(), null, String.valueOf(message.getText()), null, null);
-                                Toast.makeText(a, "Message is sent", Toast.LENGTH_SHORT).show();
-
+                                startAlarm(calender, phone, text);
                             }
                         });
                     }
@@ -100,7 +83,17 @@ public class MessageToParticipant extends Fragment {
                 });
             }
         });
-
         return view;
+    }
+
+    private void startAlarm(Calendar c, String phone, String text) {
+        final int requestCode = 1337;
+        AlarmManager am = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(getActivity(), AlarmReceiver.class);
+        intent.putExtra("phone", phone);
+        intent.putExtra("text", text);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        am.set( AlarmManager.RTC_WAKEUP, c.getTimeInMillis() , pendingIntent );
     }
 }
