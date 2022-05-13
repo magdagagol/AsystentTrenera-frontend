@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,5 +96,7 @@ public class MessageToParticipant extends Fragment {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         am.set( AlarmManager.RTC_WAKEUP, c.getTimeInMillis() , pendingIntent );
+
+        Log.i("alarm", "time to sent: " + c.getTime());
     }
 }
