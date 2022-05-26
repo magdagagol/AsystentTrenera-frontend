@@ -3,6 +3,7 @@ package com.asystenttrenera_frontend.participant;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.asystenttrenera_frontend.group.Group;
 import com.asystenttrenera_frontend.parent.Parent;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Participant implements Parcelable {
     private String email;
     private String phoneNumber;
     private ArrayList<Parent> parents;
+    private Group group;
 
     public Participant(Long id, String name, String surname, String yearOfBirth) {
         this.id = id;
@@ -61,6 +63,27 @@ public class Participant implements Parcelable {
         this.parents = parents;
     }
 
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, Group group) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.group = group;
+    }
+
+    public Participant(Long id, String name, String surname, String yearOfBirth, String email, String phoneNumber, ArrayList<Parent> parents, Group group) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.yearOfBirth = yearOfBirth;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.parents = parents;
+        this.group = group;
+    }
+
     @Override
     public String toString() {
         return "Participant{" +
@@ -71,6 +94,7 @@ public class Participant implements Parcelable {
                 ", email='" + email + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", parents=" + parents +
+                ", group=" + group +
                 '}';
     }
 
@@ -125,6 +149,10 @@ public class Participant implements Parcelable {
     public void setParents(ArrayList<Parent> parents) {
         this.parents = parents;
     }
+
+    public Group getGroup() { return group; }
+
+    public void setGroup(Group group) { this.group = group; }
 
     @Override
     public int describeContents() {

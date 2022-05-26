@@ -11,6 +11,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.asystenttrenera_frontend.group.Group;
 import com.asystenttrenera_frontend.parent.Parent;
 
 import org.json.JSONArray;
@@ -48,7 +49,15 @@ public class ParticipantService {
                         try {
                             for(int i=0; i<response.length(); i++){ ;
                                 JSONObject participant = response.getJSONObject(i);
+                                try {
+                                    JSONObject group = participant.getJSONObject("participantGroup");
 
+                                    Group g = new Group(group.getLong("id"), group.getString("name"));
+                                    Log.i("json", g.toString());
+
+                                } catch (Exception e) {
+                                    Log.i("exception", e.toString());
+                                }
                                 JSONArray parents = participant.getJSONArray("enrolledParents");
 
                                 ArrayList<Parent> parentsList = new ArrayList<>();
@@ -153,6 +162,122 @@ public class ParticipantService {
                     }
                 });
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    // GET
+    public void getParticipantsWithGroup(VolleyResponseListener volleyResponseListener, Long id){
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url + "/group/" + id, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        ArrayList<Participant> participantList = new ArrayList<>();
+                        Group group = null;
+                        Log.i("response", "getParticipantsWithGroup " + response);
+                        try {
+                            for(int i=0; i<response.length(); i++){
+                                JSONObject participant = response.getJSONObject(i);
+                                try {
+                                    JSONObject groupJson = participant.getJSONObject("participantGroup");
+                                    group = new Group(groupJson.getLong("id"), groupJson.getString("name"));
+
+                                } catch (Exception e) {
+                                    Log.i("exception", e.toString());
+                                }
+
+                                participantList.add(new Participant(
+                                        participant.getLong("id"),
+                                        participant.getString("name"),
+                                        participant.getString("surname"),
+                                        participant.getString("yearOfBirth"),
+                                        participant.getString("email"),
+                                        participant.getString("phoneNumber"),
+                                        group
+                                ));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        volleyResponseListener.onResponse(participantList);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyResponseListener.onError("Something wrong");
+            }
+        });
+
+        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+
+    }
+
+    // GET
+    public void getParticipantsWithoutGroup(VolleyResponseListener volleyResponseListener, Long id){
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url + "/withoutGroup/" + id, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        ArrayList<Participant> participantList = new ArrayList<>();
+                        Group group = null;
+                        Log.i("response", "getParticipantsWithoutGroup " + response);
+                        try {
+                            for(int i=0; i<response.length(); i++){
+                                JSONObject participant = response.getJSONObject(i);
+                                try {
+                                    JSONObject groupJson = participant.getJSONObject("participantGroup");
+                                    group = new Group(groupJson.getLong("id"), groupJson.getString("name"));
+                                    participantList.add(new Participant(
+                                            participant.getLong("id"),
+                                            participant.getString("name"),
+                                            participant.getString("surname"),
+                                            participant.getString("yearOfBirth"),
+                                            participant.getString("email"),
+                                            participant.getString("phoneNumber"),
+                                            group
+                                    ));
+                                } catch (Exception e) {
+                                    Log.i("exception", e.toString());
+                                    participantList.add(new Participant(
+                                            participant.getLong("id"),
+                                            participant.getString("name"),
+                                            participant.getString("surname"),
+                                            participant.getString("yearOfBirth"),
+                                            participant.getString("email"),
+                                            participant.getString("phoneNumber")
+                                    ));
+                                 }
+                                }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        volleyResponseListener.onResponse(participantList);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                volleyResponseListener.onError("Something wrong");
+            }
+        });
+
+        MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
+    }
+
+    public void addParticipantToGroup(Long participantId, Long groupId){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url + "/" + participantId + "/withGroup/" + groupId, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            }
+        });
+
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
     }
 
 }

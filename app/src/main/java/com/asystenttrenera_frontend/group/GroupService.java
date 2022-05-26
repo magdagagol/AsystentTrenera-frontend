@@ -47,24 +47,11 @@ public class GroupService {
                             for(int i=0; i< response.length(); i++){
                                 JSONObject object = response.getJSONObject(i);
                                 System.out.println("response.getJSONObject(i)" + response.getJSONObject(i));
-                                JSONArray array = object.getJSONArray("participants");
-                                for(int j=0; j<array.length(); j++){
-                                    System.out.println("Group service participants j" + array.getJSONObject(j).getLong("id"));
-                                    participants.add(new Participant(
-                                            array.getJSONObject(j).getLong("id"),
-                                            array.getJSONObject(j).getString("name"),
-                                            array.getJSONObject(j).getString("surname"),
-                                            array.getJSONObject(j).getString("yearOfBirth")
-                                    ));
-                                }
 
                                 groupArrayList.add(new Group(
                                         object.getLong("id"),
-                                        object.getString("name"),
-                                        participants
+                                        object.getString("name")
                                 ));
-
-                                System.out.println("Group service test: " + groupArrayList.get(0).getParticipants());
 
                             }
                         } catch (JSONException e) {

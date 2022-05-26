@@ -61,14 +61,11 @@ public class MessageToGroup extends Fragment {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         Group group = (Group) adapterView.getItemAtPosition(i);
-                        Toast.makeText(getActivity(), "Spinner works with: " + group.getParticipants(), Toast.LENGTH_SHORT).show();
                         saveMessageToGroup.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
 
                                 Spinner spinner = (Spinner) view.findViewById(R.id.spinner2);
-                                String text = group.getParticipants().toString();
-                                System.out.println("############################## " + text);
                                 if(checkBoxParents.isChecked()){
                                     //checkBoxParents.setChecked(true);
                                     checkBoxParticipants.setChecked(false);

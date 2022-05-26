@@ -7,15 +7,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.asystenttrenera_frontend.R;
 import com.asystenttrenera_frontend.participant.Participant;
+import com.asystenttrenera_frontend.participant.ParticipantService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONObject;
@@ -65,11 +69,32 @@ public class GroupDetails extends AppCompatActivity implements EditGroupDialog.A
         Intent intent = getIntent();
         group = (Group) intent.getParcelableExtra("group");
 
-        participants = group.getParticipants();
         getSupportActionBar().setTitle(group.getName());
 
-        adapter = new ParticipantForGroupAdapter(participants);
-        recyclerView.setAdapter(adapter);
+        ParticipantService participantService = new ParticipantService(GroupDetails.this);
+        Long group_id = group.getId();
+        participantService.getParticipantsWithGroup(new ParticipantService.VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                System.out.println(message);
+            }
+
+            @Override
+            public void onResponse(ArrayList<Participant> response) {
+                Log.i("group", response.toString());
+                participants = response;
+                TextView textView = findViewById(R.id.textView2);
+
+                if (participants.isEmpty()){
+                    textView.setText("Grupa nie ma jeszcze zawodników");
+                } else {
+                    adapter = new ParticipantForGroupAdapter(participants);
+                    Log.i("group2", participants.toString());
+                    recyclerView.setAdapter(adapter);
+                    textView.setVisibility(View.INVISIBLE);
+                }
+            }
+        }, group_id);
 
         addParticipantsFB = findViewById(R.id.addParticipantsFB);
 
@@ -77,6 +102,8 @@ public class GroupDetails extends AppCompatActivity implements EditGroupDialog.A
             @Override
             public void onClick(View view) {
                 Intent newIntent = new Intent(GroupDetails.this, AddParticipants.class);
+                newIntent.putExtra("groupName", group.getName());
+                newIntent.putExtra("groupId", group.getId());
                 startActivity(newIntent);
             }
         });
