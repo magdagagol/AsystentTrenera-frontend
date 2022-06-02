@@ -9,37 +9,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_margin="10dp"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/addParticipantName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Imie" />
+            android:layout_margin="5dp"
+            android:hint="Imie"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/addParticipantSurname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nazwisko" />
+            android:layout_margin="5dp"
+            android:hint="Nazwisko"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/addParticipantYearOfBirth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Rok urodzenia" />
+            android:layout_margin="5dp"
+            android:hint="Rok urodzenia"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/addParticipantEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email" />
+            android:layout_margin="5dp"
+            android:hint="Email"
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/addParticipantPhoneNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Numer telefonu" />
+            android:layout_margin="5dp"
+            android:hint="Numer telefonu"
+            android:minHeight="48dp" />
 
         <Button
             android:id="@+id/addNewParticipant"

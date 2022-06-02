@@ -57,7 +57,6 @@ public class ParticipantActivity extends AppCompatActivity implements Participan
         Intent intent = new Intent(this, ParticipantDetails.class);
         int i = participantList.indexOf(index);
         Participant participant = participantList.get(index);
-        //intent.putExtra("details", participant);
         intent.putExtra("details", participant);
         startActivity(intent);
     }

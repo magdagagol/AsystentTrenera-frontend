@@ -9,5 +9,11 @@
     <item android:id="@+id/delete"
         android:title="Usuń"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/physicalCheckup"
+        android:title="Badania" />
+    <item
+        android:id="@+id/kyu"
+        android:title="Kyu" />
 
 </menu>

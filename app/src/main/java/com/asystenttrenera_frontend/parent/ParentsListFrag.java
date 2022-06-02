@@ -49,10 +49,10 @@ public class ParentsListFrag extends Fragment {
         ArrayList<Parent> parentArrayList = new ArrayList<>();
 
         //parentArrayList.add(new Parent(1L, "Monika", "Basińska", 123, "m.basinska@gmail.com", true));
-        parentArrayList.add(new Parent(2L, "sdadad imie", "aaa nazwisko", "num tel", "email", true));
-        parentArrayList.add(new Parent(3L,"aaa imie", "aaa nazwisko", "num tel", "email", true));
-        parentArrayList.add(new Parent(4L,"aaa imie", "aaa nazwisko", "num tel", "email", true));
-        parentArrayList.add(new Parent(5L,"aaa imie", "aaa nazwisko", "num tel", "email", true));
+        parentArrayList.add(new Parent(2L, "1111 imie", "aaa nazwisko", "num tel", "email", true));
+        parentArrayList.add(new Parent(3L,"222 imie", "aaa nazwisko", "num tel", "email", true));
+        parentArrayList.add(new Parent(4L,"333 imie", "aaa nazwisko", "num tel", "email", true));
+        parentArrayList.add(new Parent(5L,"444 imie", "aaa nazwisko", "num tel", "email", true));
         System.out.println("################### parent 1111 list " + parentArrayList.toString());
 
 

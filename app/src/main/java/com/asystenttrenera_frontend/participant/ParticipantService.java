@@ -60,6 +60,9 @@ public class ParticipantService {
                                 }
                                 JSONArray parents = participant.getJSONArray("enrolledParents");
 
+                                JSONArray physicalCheckups = participant.getJSONArray("physicalCheckups");
+                                Log.i("json", physicalCheckups.toString());
+
                                 ArrayList<Parent> parentsList = new ArrayList<>();
                                 if(parents.length()>0){
 

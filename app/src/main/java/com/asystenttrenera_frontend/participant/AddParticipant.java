@@ -22,6 +22,7 @@ public class AddParticipant extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_participant);
+        getSupportActionBar().setTitle("Dodawanie nowego zawodnika");
 
         addParticipantName = findViewById(R.id.addParticipantName);
         addParticipantSurname = findViewById(R.id.addParticipantSurname);

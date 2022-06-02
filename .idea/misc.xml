@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3927083333333333" />
         <entry key="app/src/main/res/drawable/add.xml" value="0.3927083333333333" />
         <entry key="app/src/main/res/drawable/add_circle.xml" value="0.3927083333333333" />
@@ -13,17 +14,20 @@
         <entry key="app/src/main/res/layout/activity_add_participant_to_group_item.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_add_participants.xml" value="0.22137404580152673" />
         <entry key="app/src/main/res/layout/activity_dodaj_zawodnika.xml" value="0.209375" />
-        <entry key="app/src/main/res/layout/activity_group_details.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/activity_group_details.xml" value="0.1625615763546798" />
         <entry key="app/src/main/res/layout/activity_group_spinner_row.xml" value="0.22083333333333333" />
         <entry key="app/src/main/res/layout/activity_groups.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37623762376237624" />
         <entry key="app/src/main/res/layout/activity_message.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_participant.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_participant_details.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/activity_physical_checkup.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_zawodnik_details.xml" value="0.20989583333333334" />
         <entry key="app/src/main/res/layout/add_participant_to_group_item.xml" value="0.18262411347517732" />
+        <entry key="app/src/main/res/layout/add_physical_checkup_dialog.xml" value="0.25" />
         <entry key="app/src/main/res/layout/checkbox_add_participant_to_group_item.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/custom_spinner_participant_adapter.xml" value="0.14915254237288136" />
+        <entry key="app/src/main/res/layout/edit_physical_checkup_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_message_to_group.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/fragment_message_to_participant.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_parent_list.xml" value="0.20989583333333334" />
@@ -40,8 +44,11 @@
         <entry key="app/src/main/res/layout/participant_for_group_item.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/participants_activity.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/participants_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/physical_checkups_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/picker.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/spinner_group_row.xml" value="0.5" />
+        <entry key="app/src/main/res/menu/dropdown_menu.xml" value="0.25677083333333334" />
+        <entry key="app/src/main/res/menu/participant_details.xml" value="0.33" />
         <entry key="app/src/main/res/menu/participant_in_group_details.xml" value="0.3765625" />
       </map>
     </option>

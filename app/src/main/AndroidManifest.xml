@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.asystenttrenera_frontend">
+    package="com.asystenttrenera_frontend" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AsystentTrenerafrontend"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+
         <receiver
             android:name=".message.AlarmReceiver"
             android:enabled="true" >
@@ -27,6 +27,9 @@
             android:exported="false" />
         <activity
             android:name=".participant.AddParticipant"
+            android:exported="false" />
+        <activity
+            android:name=".physicalCheckup.PhysicalCheckupActivity"
             android:exported="false" />
         <activity
             android:name=".group.AddParticipants"
@@ -47,7 +50,7 @@
         <activity android:name=".participant.ParticipantActivity" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -17,11 +17,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.asystenttrenera_frontend.MainActivity;
 import com.asystenttrenera_frontend.R;
 import com.asystenttrenera_frontend.group.GroupService;
+import com.asystenttrenera_frontend.group.GroupsActivity;
 import com.asystenttrenera_frontend.parent.Parent;
 import com.asystenttrenera_frontend.parent.ParentAdapter;
 import com.asystenttrenera_frontend.parent.ParentsListFrag;
+import com.asystenttrenera_frontend.physicalCheckup.PhysicalCheckupActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +45,14 @@ public class ParticipantDetails extends AppCompatActivity {
             case R.id.edit:
                 //openDialog(group);
                 Toast.makeText(this, "Edycja zawodnika", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.physicalCheckup:
+                Intent intent = new Intent(ParticipantDetails.this, PhysicalCheckupActivity.class);
+                intent.putExtra("participant", participant);
+                startActivity(intent);
+                break;
+            case R.id.kyu:
+                Toast.makeText(this, "Kyu zawodnika", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.delete:
                 ParticipantService participantService = new ParticipantService(this);
