@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,8 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.asystenttrenera_frontend.R;
 import com.asystenttrenera_frontend.participant.Participant;
-import com.asystenttrenera_frontend.participant.ParticipantAdapter;
-import com.asystenttrenera_frontend.participant.ParticipantDetails;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -40,7 +37,6 @@ public class PhysicalCheckupActivity extends AppCompatActivity implements AddPhy
 
         Intent intent = getIntent();
         Participant participant = intent.getParcelableExtra("participant");
-        Log.i("test", participant.toString());
 
         recyclerView = findViewById(R.id.physical_checkup_rv);
         layoutManager = new LinearLayoutManager(this);

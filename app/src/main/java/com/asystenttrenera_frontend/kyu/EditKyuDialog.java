@@ -1,4 +1,4 @@
-package com.asystenttrenera_frontend.physicalCheckup;
+package com.asystenttrenera_frontend.kyu;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -21,16 +21,12 @@ import com.asystenttrenera_frontend.R;
 import java.text.ParseException;
 import java.util.Date;
 
-public class EditPhysicalCheckupDialog extends AppCompatDialogFragment {
-    private EditText edit_physical_checkup_data;
-    private EditText edit_height;
-    private EditText edit_weight;
-    private EditText edit_comment;
-    private EditPhysicalCheckupDialogListener listener;
+public class EditKyuDialog extends AppCompatDialogFragment {
+    private EditText exam_date;
+    private EditText kyu_degree;
+    private EditKyuDialogListener listener;
 
-    private PhysicalCheckup physicalCheckup;
-
-
+    private Kyu kyu;
 
     @NonNull
     @Override
@@ -38,9 +34,9 @@ public class EditPhysicalCheckupDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.edit_physical_checkup_dialog, null);
+        View view = inflater.inflate(R.layout.edit_kyu_dialog, null);
         Bundle extras = getArguments();
-        physicalCheckup = extras.getParcelable("checkup");
+        kyu = extras.getParcelable("kyu");
 
         builder.setView(view)
                 .setTitle("Edytuj")
@@ -53,52 +49,43 @@ public class EditPhysicalCheckupDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Dodaj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String dateString = edit_physical_checkup_data.getText().toString();
+                        String dateString = exam_date.getText().toString();
                         Date date = null;
                         try {
                             date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
-                        Double height  = Double.parseDouble(edit_height.getText().toString());
-                        Double weight = Double.parseDouble(edit_weight.getText().toString());
-                        String comment = edit_comment.getText().toString();
+                        Log.i("date1", date.toString());
+                        String kyuDegree = kyu_degree.getText().toString();
 
-                        listener.updateTexts(physicalCheckup.getId(), date, height, weight, comment);
+                        listener.updateTexts(kyu.getId(), date, kyuDegree);
                     }
                 });
-        edit_physical_checkup_data = view.findViewById(R.id.edit_physical_checkup_data);
-        Date dateT = physicalCheckup.getPhysicalCheckupData();
+        exam_date = view.findViewById(R.id.edit_exam_date);
+        Date dateT = kyu.getExamDate();
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         String date = df.format(dateT);
 
-        edit_physical_checkup_data.setText(date);
+        exam_date.setText(date);
 
-        edit_height = view.findViewById(R.id.edit_height);
-        edit_height.setText(physicalCheckup.getHeight().toString());
-
-        edit_weight = view.findViewById(R.id.edit_weight);
-        edit_weight.setText(physicalCheckup.getWeight().toString());
-
-        edit_comment = view.findViewById(R.id.edit_comment);
-        edit_comment.setText(physicalCheckup.getComment());
+        kyu_degree = view.findViewById(R.id.edit_kyu_degree);
+        kyu_degree.setText(kyu.getKyuDegree());
 
         return builder.create();
     }
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
         try {
-            listener = (EditPhysicalCheckupDialogListener) context;
+            listener = (EditKyuDialogListener) context;
         } catch(Exception e) {
             e.printStackTrace();
         }
-
     }
 
-    public interface EditPhysicalCheckupDialogListener {
-        void updateTexts(Long id, Date data, Double height, Double weight, String comment);
+    public interface EditKyuDialogListener {
+        void updateTexts(Long id, Date examDate, String kyuDegree);
     }
 }

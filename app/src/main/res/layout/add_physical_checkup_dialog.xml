@@ -9,7 +9,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/edit_physical_checkup_data"
+            android:id="@+id/add_physical_checkup_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -18,7 +18,7 @@
             android:text="Data badania" />
 
         <EditText
-            android:id="@+id/edit_height"
+            android:id="@+id/add_height"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -27,7 +27,7 @@
             android:text="Wzrost" />
 
         <EditText
-            android:id="@+id/edit_weight"
+            android:id="@+id/add_weight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -36,7 +36,7 @@
             android:text="Waga" />
 
         <EditText
-            android:id="@+id/edit_comment"
+            android:id="@+id/add_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

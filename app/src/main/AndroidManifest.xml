@@ -32,6 +32,9 @@
             android:name=".physicalCheckup.PhysicalCheckupActivity"
             android:exported="false" />
         <activity
+            android:name=".kyu.KyuActivity"
+            android:exported="false" />
+        <activity
             android:name=".group.AddParticipants"
             android:exported="false" />
         <activity

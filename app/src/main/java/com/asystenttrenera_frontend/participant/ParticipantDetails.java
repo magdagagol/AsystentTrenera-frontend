@@ -21,6 +21,7 @@ import com.asystenttrenera_frontend.MainActivity;
 import com.asystenttrenera_frontend.R;
 import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.group.GroupsActivity;
+import com.asystenttrenera_frontend.kyu.KyuActivity;
 import com.asystenttrenera_frontend.parent.Parent;
 import com.asystenttrenera_frontend.parent.ParentAdapter;
 import com.asystenttrenera_frontend.parent.ParentsListFrag;
@@ -41,6 +42,7 @@ public class ParticipantDetails extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
         switch (item.getItemId()){
             case R.id.edit:
                 //openDialog(group);
@@ -52,7 +54,9 @@ public class ParticipantDetails extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.kyu:
-                Toast.makeText(this, "Kyu zawodnika", Toast.LENGTH_SHORT).show();
+                Intent intentKyu = new Intent(ParticipantDetails.this, KyuActivity.class);
+                intentKyu.putExtra("participant", participant);
+                startActivity(intentKyu);
                 break;
             case R.id.delete:
                 ParticipantService participantService = new ParticipantService(this);
