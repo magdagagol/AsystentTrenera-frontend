@@ -1,6 +1,7 @@
 package com.asystenttrenera_frontend.parent;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,62 +10,101 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.asystenttrenera_frontend.R;
-import com.asystenttrenera_frontend.participant.Participant;
-import com.asystenttrenera_frontend.participant.ParticipantDetails;
 
 import java.util.ArrayList;
 
-public class ParentsListFrag extends Fragment {
+public class ParentsListFrag extends Fragment implements ParentAdapter.ItemClicked, EditParentDialog.EditParentDialogListener,
+DeleteParentDialog.DeleteParentDialogListener {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
     View view;
     ArrayList<Parent> parentArrayList;
 
-    public ParentsListFrag() {
-        super(R.layout.fragment_parents_list);
+    private Parent currentParent;
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case 121:
+                Log.i("item", "Usuń " + currentParent.toString());
+                deleteParent(currentParent.getId());
+                return true;
+            case 122:
+                Log.i("item", "Edytuj " + currentParent.toString());
+                editParent(currentParent);
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
-    public ParentsListFrag(ArrayList<Parent> parentArrayList) {
-        this.parentArrayList = parentArrayList;
-        System.out.println("parent array list " + parentArrayList.toString());
-    }
-
-    public ParentsListFrag(int contentLayoutId, ArrayList<Parent> parentArrayList) {
-        super(contentLayoutId);
-        this.parentArrayList = parentArrayList;
-
+    private void deleteParent(Long id) {
+        DeleteParentDialog deleteParentDialog = new DeleteParentDialog();
+        Bundle args = new Bundle();
+        args.putLong("parent_id", id);
+        deleteParentDialog.setArguments(args);
+        deleteParentDialog.show(getActivity().getSupportFragmentManager().beginTransaction(), "deleteParentDialog");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //ArrayList<Parent> parentArrayList = getArguments().getParcelableArrayList("parent");
-        ArrayList<Parent> parentArrayList = new ArrayList<>();
-
-        //parentArrayList.add(new Parent(1L, "Monika", "Basińska", 123, "m.basinska@gmail.com", true));
-        parentArrayList.add(new Parent(2L, "1111 imie", "aaa nazwisko", "num tel", "email", true));
-        parentArrayList.add(new Parent(3L,"222 imie", "aaa nazwisko", "num tel", "email", true));
-        parentArrayList.add(new Parent(4L,"333 imie", "aaa nazwisko", "num tel", "email", true));
-        parentArrayList.add(new Parent(5L,"444 imie", "aaa nazwisko", "num tel", "email", true));
-        System.out.println("################### parent 1111 list " + parentArrayList.toString());
-
-
         view = inflater.inflate(R.layout.fragment_parents_list, container, false);
+
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            parentArrayList = getArguments().getParcelableArrayList("parents");
+        } else {
+            Log.i("ErrorMessage", "nie ma takiego bundle");
+        }
 
         recyclerView = view.findViewById(R.id.parentRecyclerView);
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new ParentAdapter(parentArrayList);
+        adapter = new ParentAdapter(this, parentArrayList);
         recyclerView.setAdapter(adapter);
 
         return view;
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onItemClicked(int item) {
+        currentParent = parentArrayList.get(item);
+    }
+
+    @Override
+    public void deleteTexts(Long id) {
+        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa" + id);
+        ParentService parentService = new ParentService(getActivity());
+        parentService.deleteParent(id);
+    }
+
+    private void editParent(Parent currentParent) {
+        EditParentDialog editParentDialog = new EditParentDialog();
+        Bundle args = new Bundle();
+        args.putParcelable("parent", currentParent);
+        editParentDialog.setArguments(args);
+        editParentDialog.show(getActivity().getSupportFragmentManager().beginTransaction(), "deleteParentDialog");
+    }
+
+    @Override
+    public void updateTexts(Long id, String name, String surname, String phoneNumber, String email, Boolean contactAgree) {
+        Parent parent = new Parent(name, surname, phoneNumber, email, contactAgree);
+        ParentService parentService = new ParentService(getActivity());
+        parentService.updateParent(parent, id);
+    }
 }

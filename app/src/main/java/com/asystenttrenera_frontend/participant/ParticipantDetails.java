@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -71,16 +73,19 @@ public class ParticipantDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (savedInstanceState == null) {
-            Bundle bundle = new Bundle();
-            bundle.putInt("some_int", 0);
+        Intent intent = getIntent();
+        participant = intent.getParcelableExtra("details");
 
-            getSupportFragmentManager().beginTransaction()
-                    .setReorderingAllowed(true)
-                    .add(R.id.fragmentContainerView, ParentsListFrag.class, null)
-                    .commit();
-        }
+        Bundle bundle = new Bundle();
+        bundle.putParcelableArrayList("parents", (ArrayList<? extends Parcelable>) participant.getParents());
 
+        Log.i("parents+", participant.getParents().toString());
+
+        ParentsListFrag parentsListFrag = new ParentsListFrag();
+        parentsListFrag.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragmentContainerView, parentsListFrag)
+                .commit();
 
         setContentView(R.layout.activity_participant_details);
         //String activityTitle = participant.getName() + " " + participant.getSurname();
@@ -93,11 +98,6 @@ public class ParticipantDetails extends AppCompatActivity {
         TextView addYearOfBirth = findViewById(R.id.addYearOfBirth);
         TextView addPhoneNumber = findViewById(R.id.addPhoneNumber);
 
-        Intent intent = getIntent();
-       // ArrayList<Parcelable> participant = intent.getParcelableArrayListExtra("details");
-
-        participant = intent.getParcelableExtra("details");
-
         addName.setText(participant.getName());
         addSurname.setText(participant.getSurname());
         addEmail.setText(participant.getEmail());
@@ -107,20 +107,6 @@ public class ParticipantDetails extends AppCompatActivity {
         List<Parent> p = participant.getParents();
         ArrayList<Parent> parentArrayList = new ArrayList<>();
         parentArrayList.addAll(p);
-
-        Bundle bundle = new Bundle();
-        ArrayList<Parent> parent = (ArrayList<Parent>) participant.getParents();
-        //bundle.putParcelableArrayList("parent", parent);
-
-       bundle.putString("test", "444444444444444444444444From Activity");
-        // set Fragmentclass Arguments
-        Fragment fragobj = new ParentsListFrag(parent);
-        fragobj.setArguments(bundle);
-        bundle.putParcelableArrayList("parent", parent);
-
-
-
-        Button button = findViewById(R.id.buttonAddParent);
 
     }
 }

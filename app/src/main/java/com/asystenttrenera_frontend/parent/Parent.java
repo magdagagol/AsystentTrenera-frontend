@@ -80,6 +80,18 @@ public class Parent implements Parcelable, Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Parent{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", contactAgree=" + contactAgree +
+                '}';
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }

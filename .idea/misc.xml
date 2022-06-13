@@ -21,7 +21,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37623762376237624" />
         <entry key="app/src/main/res/layout/activity_message.xml" value="0.36041666666666666" />
         <entry key="app/src/main/res/layout/activity_participant.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/activity_participant_details.xml" value="0.3765625" />
+        <entry key="app/src/main/res/layout/activity_participant_details.xml" value="0.3497536945812808" />
         <entry key="app/src/main/res/layout/activity_physical_checkup.xml" value="0.15555555555555556" />
         <entry key="app/src/main/res/layout/activity_zawodnik_details.xml" value="0.20989583333333334" />
         <entry key="app/src/main/res/layout/add_participant_to_group_item.xml" value="0.18262411347517732" />
@@ -29,7 +29,9 @@
         <entry key="app/src/main/res/layout/checkbox_add_participant_to_group_item.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/custom_spinner_participant_adapter.xml" value="0.14915254237288136" />
         <entry key="app/src/main/res/layout/edit_kyu_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/edit_parent_dialog.xml" value="0.1" />
         <entry key="app/src/main/res/layout/edit_physical_checkup_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_add_parent.xml" value="0.3497536945812808" />
         <entry key="app/src/main/res/layout/fragment_message_to_group.xml" value="0.3765625" />
         <entry key="app/src/main/res/layout/fragment_message_to_participant.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_parent_list.xml" value="0.20989583333333334" />

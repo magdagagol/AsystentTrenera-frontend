@@ -1,26 +1,37 @@
 package com.asystenttrenera_frontend.parent;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asystenttrenera_frontend.R;
+import com.asystenttrenera_frontend.physicalCheckup.PhysicalCheckupAdapter;
 
 import java.util.ArrayList;
 
 public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder> {
     private ArrayList<Parent> parents;
+    ItemClicked activity;
 
-    public ParentAdapter(ArrayList<Parent> parents) {
-        this.parents = parents;
+    public interface ItemClicked {
+        void onItemClicked(int item);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+
+    public ParentAdapter(Fragment context, ArrayList<Parent> parents) {
+        this.parents = parents;
+        activity = (ItemClicked) context;
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         private TextView parentName;
         private TextView parentSurname;
         private TextView parentEmail;
@@ -42,6 +53,14 @@ public class ParentAdapter extends RecyclerView.Adapter<ParentAdapter.ViewHolder
 
                 }
             });
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+            activity.onItemClicked(parents.indexOf(itemView.getTag()));
+            contextMenu.add(this.getAbsoluteAdapterPosition(), 121, 0, "Usuń");
+            contextMenu.add(this.getAbsoluteAdapterPosition(), 122, 0, "Edytuj");
         }
     }
 

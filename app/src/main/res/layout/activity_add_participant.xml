@@ -6,59 +6,77 @@
     android:layout_height="match_parent"
     tools:context=".participant.AddParticipant">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/addParticipantName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Imie"
-            android:minHeight="48dp" />
+            android:orientation="vertical" >
 
-        <EditText
-            android:id="@+id/addParticipantSurname"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Nazwisko"
-            android:minHeight="48dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/addParticipantYearOfBirth"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Rok urodzenia"
-            android:minHeight="48dp" />
+                <EditText
+                    android:id="@+id/addParticipantName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Imie"
+                    android:minHeight="48dp" />
 
-        <EditText
-            android:id="@+id/addParticipantEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Email"
-            android:minHeight="48dp" />
+                <EditText
+                    android:id="@+id/addParticipantSurname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Nazwisko"
+                    android:minHeight="48dp" />
 
-        <EditText
-            android:id="@+id/addParticipantPhoneNumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Numer telefonu"
-            android:minHeight="48dp" />
+                <EditText
+                    android:id="@+id/addParticipantYearOfBirth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Rok urodzenia"
+                    android:minHeight="48dp" />
 
-        <Button
-            android:id="@+id/addNewParticipant"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dodaj zawodnika"
-            tools:layout_editor_absoluteX="185dp"
-            tools:layout_editor_absoluteY="456dp" />
-    </LinearLayout>
+                <EditText
+                    android:id="@+id/addParticipantEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Email"
+                    android:minHeight="48dp" />
+
+                <EditText
+                    android:id="@+id/addParticipantPhoneNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Numer telefonu"
+                    android:minHeight="48dp" />
+
+                <LinearLayout
+                    android:id="@+id/test_fragmet"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"></LinearLayout>
+
+                <Button
+                    android:id="@+id/addNewParticipant"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Zapisz"
+                    tools:layout_editor_absoluteX="185dp"
+                    tools:layout_editor_absoluteY="456dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

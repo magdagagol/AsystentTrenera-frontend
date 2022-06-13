@@ -3,6 +3,7 @@ package com.asystenttrenera_frontend.participant;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +32,7 @@ public class AddParticipant extends AppCompatActivity {
         addParticipantPhoneNumber = findViewById(R.id.addParticipantPhoneNumber);
 
         addNewParticipant = findViewById(R.id.addNewParticipant);
+
         addNewParticipant.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,11 +49,8 @@ public class AddParticipant extends AppCompatActivity {
                 participantService.addParticipant(object);
 
                 Toast.makeText(AddParticipant.this, "Zawodnik zosatł dodany", Toast.LENGTH_SHORT).show();
-
                 AddParticipant.this.finish();
             }
         });
-
-
     }
 }
