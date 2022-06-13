@@ -29,6 +29,7 @@ DeleteParentDialog.DeleteParentDialogListener {
     ArrayList<Parent> parentArrayList;
 
     private Parent currentParent;
+    private Long participant_id;
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
@@ -63,6 +64,7 @@ DeleteParentDialog.DeleteParentDialogListener {
         Bundle bundle = this.getArguments();
         if (bundle != null) {
             parentArrayList = getArguments().getParcelableArrayList("parents");
+            participant_id = getArguments().getLong("participant_id");
         } else {
             Log.i("ErrorMessage", "nie ma takiego bundle");
         }
@@ -88,9 +90,8 @@ DeleteParentDialog.DeleteParentDialogListener {
 
     @Override
     public void deleteTexts(Long id) {
-        System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa" + id);
         ParentService parentService = new ParentService(getActivity());
-        parentService.deleteParent(id);
+        parentService.deleteParent(id, participant_id);
     }
 
     private void editParent(Parent currentParent) {

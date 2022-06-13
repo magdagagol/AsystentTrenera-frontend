@@ -78,8 +78,9 @@ public class ParticipantDetails extends AppCompatActivity {
 
         Bundle bundle = new Bundle();
         bundle.putParcelableArrayList("parents", (ArrayList<? extends Parcelable>) participant.getParents());
+        bundle.putLong("participant_id", participant.getId());
 
-        Log.i("parents+", participant.getParents().toString());
+        Log.i("parents+", participant.toString());
 
         ParentsListFrag parentsListFrag = new ParentsListFrag();
         parentsListFrag.setArguments(bundle);

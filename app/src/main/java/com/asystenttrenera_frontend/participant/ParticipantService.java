@@ -46,14 +46,15 @@ public class ParticipantService {
                     @Override
                     public void onResponse(JSONArray response) {
                         ArrayList<Participant> participantList = new ArrayList<>();
+                        Group group = null;
                         try {
                             for(int i=0; i<response.length(); i++){ ;
                                 JSONObject participant = response.getJSONObject(i);
                                 try {
-                                    JSONObject group = participant.getJSONObject("participantGroup");
+                                    JSONObject jsonObjectGroup = participant.getJSONObject("participantGroup");
 
-                                    Group g = new Group(group.getLong("id"), group.getString("name"));
-                                    Log.i("json", g.toString());
+                                    group = new Group(jsonObjectGroup.getLong("id"), jsonObjectGroup.getString("name"));
+                                    Log.i("json", group.toString());
 
                                 } catch (Exception e) {
                                     Log.i("exception", e.toString());

@@ -102,7 +102,7 @@ public class ParentService {
         JSONObject jsonObject = new JSONObject();
         try{
             jsonObject.put("name", parent.getName());
-            jsonObject.put("surName", parent.getSurname());
+            jsonObject.put("surname", parent.getSurname());
             jsonObject.put("phoneNumber", parent.getPhoneNumber());
             jsonObject.put("email", parent.getEmail());
             jsonObject.put("contactAgree", parent.getContactAgree());
@@ -127,8 +127,8 @@ public class ParentService {
 
 
     //DELETE
-    public void deleteParent (Long id){
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url+"/"+id, null, new Response.Listener<JSONObject>() {
+    public void deleteParent (Long parent_id, Long participant_id){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url+"/"+parent_id+"/participant/"+participant_id, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
