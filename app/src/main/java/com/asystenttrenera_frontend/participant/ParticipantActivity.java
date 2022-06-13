@@ -52,6 +52,8 @@ public class ParticipantActivity extends AppCompatActivity implements Participan
 
     }
 
+
+
     @Override
     public void onItemClicked(int index) {
         Intent intent = new Intent(this, ParticipantDetails.class);

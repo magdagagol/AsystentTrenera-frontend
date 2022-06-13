@@ -32,7 +32,7 @@ import com.asystenttrenera_frontend.physicalCheckup.PhysicalCheckupActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParticipantDetails extends AppCompatActivity {
+public class ParticipantDetails extends AppCompatActivity implements EditParticipantDialog.EditParticipantDialogListener {
     Participant participant;
 
     @Override
@@ -47,7 +47,7 @@ public class ParticipantDetails extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.edit:
-                //openDialog(group);
+                editParticipant(participant);
                 Toast.makeText(this, "Edycja zawodnika", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.physicalCheckup:
@@ -109,5 +109,20 @@ public class ParticipantDetails extends AppCompatActivity {
         ArrayList<Parent> parentArrayList = new ArrayList<>();
         parentArrayList.addAll(p);
 
+    }
+
+    private void editParticipant(Participant participant) {
+        EditParticipantDialog editParticipantDialog = new EditParticipantDialog();
+        Bundle args = new Bundle();
+        args.putParcelable("participant", participant);
+        editParticipantDialog.setArguments(args);
+        editParticipantDialog.show(getSupportFragmentManager(), "addPhysicalCheckupDialog");
+    }
+
+    @Override
+    public void updateTexts(Long id, String name, String surname, String birth, String email, String phone) {
+        Participant participant = new Participant(name, surname, birth, email, phone);
+        ParticipantService participantService = new ParticipantService(ParticipantDetails.this);
+        participantService.updateParticipant(participant, id);
     }
 }

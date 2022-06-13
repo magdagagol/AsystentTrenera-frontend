@@ -151,6 +151,35 @@ public class ParticipantService {
 
     }
 
+    // PUT
+    public void updateParticipant(Participant participant, Long id){
+        JSONObject jsonObject= new JSONObject();
+        try {
+            jsonObject.put("name", participant.getName());
+            jsonObject.put("surname", participant.getSurname());
+            jsonObject.put("yearOfBirth", participant.getYearOfBirth());
+            jsonObject.put("email", participant.getEmail());
+            jsonObject.put("phoneNumber", participant.getPhoneNumber());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url+"/"+id, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+            }
+        });
+
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+
+    }
+
     //DELETE
     public void deleteGroupObject(Long id){
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
