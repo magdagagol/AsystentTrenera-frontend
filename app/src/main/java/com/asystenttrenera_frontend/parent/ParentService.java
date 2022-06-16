@@ -66,24 +66,21 @@ public class ParentService {
         MySingleton.getInstance(context).addToRequestQueue(jsonArrayRequest);
     }
 
-    /*
     //PUT
-    public void newPhysicalCheckup (PhysicalCheckup physicalCheckup, Long id){
+    public void addParent (Parent parent, Long id) {
         JSONObject jsonObject = new JSONObject();
-        Date dateT = physicalCheckup.getPhysicalCheckupData();
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        String date = df.format(dateT);
+        try{
+            jsonObject.put("name", parent.getName());
+            jsonObject.put("surname", parent.getSurname());
+            jsonObject.put("phoneNumber", parent.getPhoneNumber());
+            jsonObject.put("email", parent.getEmail());
+            jsonObject.put("contactAgree", parent.getContactAgree());
 
-        try {
-            jsonObject.put("physicalCheckupData", date);
-            jsonObject.put("height", physicalCheckup.getHeight());
-            jsonObject.put("weight", physicalCheckup.getWeight());
-            jsonObject.put("comment", physicalCheckup.getComment());
-        } catch (JSONException e){
+        }catch (JSONException e){
             e.printStackTrace();
         }
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, QUERY_FOR_PHYSICAL_CHECKUP+"/zawodnik/"+id, jsonObject, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, url+"/zawodnik/"+id, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
@@ -96,8 +93,8 @@ public class ParentService {
         });
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
-     */
 
+    //PUT
     public void updateParent (Parent parent, Long id) {
         JSONObject jsonObject = new JSONObject();
         try{
@@ -127,8 +124,8 @@ public class ParentService {
 
 
     //DELETE
-    public void deleteParent (Long parent_id, Long participant_id){
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url+"/"+parent_id+"/participant/"+participant_id, null, new Response.Listener<JSONObject>() {
+    public void deleteParent (Long id){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, url+"/"+id, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());

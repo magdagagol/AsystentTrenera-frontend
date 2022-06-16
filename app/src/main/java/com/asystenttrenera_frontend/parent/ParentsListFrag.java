@@ -50,7 +50,7 @@ DeleteParentDialog.DeleteParentDialogListener {
     private void deleteParent(Long id) {
         DeleteParentDialog deleteParentDialog = new DeleteParentDialog();
         Bundle args = new Bundle();
-        args.putLong("parent_id", id);
+        args.putParcelable("parent", currentParent);
         deleteParentDialog.setArguments(args);
         deleteParentDialog.show(getActivity().getSupportFragmentManager().beginTransaction(), "deleteParentDialog");
     }
@@ -91,7 +91,7 @@ DeleteParentDialog.DeleteParentDialogListener {
     @Override
     public void deleteTexts(Long id) {
         ParentService parentService = new ParentService(getActivity());
-        parentService.deleteParent(id, participant_id);
+        parentService.deleteParent(id);
     }
 
     private void editParent(Parent currentParent) {

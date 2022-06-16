@@ -21,6 +21,13 @@
                 android:layout_margin="10dp"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textView13"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:text="Dane zawodnika" />
+
                 <EditText
                     android:id="@+id/addParticipantName"
                     android:layout_width="match_parent"
@@ -61,12 +68,6 @@
                     android:hint="Numer telefonu"
                     android:minHeight="48dp" />
 
-                <LinearLayout
-                    android:id="@+id/test_fragmet"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"></LinearLayout>
-
                 <Button
                     android:id="@+id/addNewParticipant"
                     android:layout_width="match_parent"
@@ -75,7 +76,16 @@
                     tools:layout_editor_absoluteX="185dp"
                     tools:layout_editor_absoluteY="456dp" />
 
+                <LinearLayout
+                    android:id="@+id/test_fragmet"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

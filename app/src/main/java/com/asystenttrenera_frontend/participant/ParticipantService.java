@@ -59,36 +59,42 @@ public class ParticipantService {
                                 } catch (Exception e) {
                                     Log.i("exception", e.toString());
                                 }
-                                JSONArray parents = participant.getJSONArray("enrolledParents");
 
-                                JSONArray physicalCheckups = participant.getJSONArray("physicalCheckups");
-                                Log.i("json", physicalCheckups.toString());
+                                try {
+                                    JSONArray parents = participant.getJSONArray("parents");
+                                    Log.i("json", parents.toString());
 
-                                ArrayList<Parent> parentsList = new ArrayList<>();
-                                if(parents.length()>0){
+                                    JSONArray physicalCheckups = participant.getJSONArray("physicalCheckups");
+                                    Log.i("json", physicalCheckups.toString());
 
-                                    for(int j=0; j<parents.length(); j++){
-                                        JSONObject p = parents.getJSONObject(j);
+                                    ArrayList<Parent> parentsList = new ArrayList<>();
+                                    if(parents.length()>0){
 
-                                        parentsList.add(new Parent(
-                                                p.getLong("id"),
-                                                p.getString("name"),
-                                                p.getString("surname"),
-                                                p.getString("phoneNumber"),
-                                                p.getString("email"),
-                                                p.getBoolean("contactAgree")
+                                        for(int j=0; j<parents.length(); j++){
+                                            JSONObject p = parents.getJSONObject(j);
+
+                                            parentsList.add(new Parent(
+                                                    p.getLong("id"),
+                                                    p.getString("name"),
+                                                    p.getString("surname"),
+                                                    p.getString("phoneNumber"),
+                                                    p.getString("email"),
+                                                    p.getBoolean("contactAgree")
+                                            ));
+                                        }
+                                        participantList.add(new Participant(
+                                                participant.getLong("id"),
+                                                participant.getString("name"),
+                                                participant.getString("surname"),
+                                                participant.getString("yearOfBirth"),
+                                                participant.getString("email"),
+                                                participant.getString("phoneNumber"),
+                                                parentsList
                                         ));
                                     }
-                                    participantList.add(new Participant(
-                                            participant.getLong("id"),
-                                            participant.getString("name"),
-                                            participant.getString("surname"),
-                                            participant.getString("yearOfBirth"),
-                                            participant.getString("email"),
-                                            participant.getString("phoneNumber"),
-                                            parentsList
-                                    ));
-                                } else {
+                                } catch (Exception e) {
+                                    Log.i("exception", e.toString());
+                                }
                                     //parentsList.add(new Parent("Nie ma takiego rodzica"));
                                     participantList.add(new Participant(
                                             participant.getLong("id"),
@@ -97,9 +103,8 @@ public class ParticipantService {
                                             participant.getString("yearOfBirth"),
                                             participant.getString("email"),
                                             participant.getString("phoneNumber"),
-                                            parentsList
+                                            new ArrayList<>()
                                     ));
-                                }
                             }
 
                         } catch (JSONException e) {
@@ -119,23 +124,19 @@ public class ParticipantService {
     }
 
     // POST
-    public JSONObject createObject(Participant participant){
-        JSONObject jsonObject= new JSONObject();
+    public void addParticipant(Participant participant){
+        JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("name", participant.getName());
             jsonObject.put("surname", participant.getSurname());
             jsonObject.put("yearOfBirth", participant.getYearOfBirth());
             jsonObject.put("email", participant.getEmail());
             jsonObject.put("phoneNumber", participant.getPhoneNumber());
-            return jsonObject;
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return jsonObject;
-    }
 
-    public void addParticipant(JSONObject object){
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, QUERY_FOR_PARTICIPANTS, object, new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, QUERY_FOR_PARTICIPANTS, jsonObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                     Log.d(TAG, response.toString());

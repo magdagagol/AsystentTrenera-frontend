@@ -45,5 +45,15 @@
             android:minHeight="48dp"
             android:text="Komentarz" />
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="hint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

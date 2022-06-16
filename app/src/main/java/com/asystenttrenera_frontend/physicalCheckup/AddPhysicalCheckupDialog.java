@@ -61,10 +61,10 @@ public class AddPhysicalCheckupDialog extends AppCompatDialogFragment {
                         listener.applyTexts(date, height, weight, comment);
                     }
                 });
-        add_physical_checkup_data = view.findViewById(R.id.edit_physical_checkup_data);
-        add_height = view.findViewById(R.id.edit_height);
-        add_weight = view.findViewById(R.id.edit_weight);
-        add_comment = view.findViewById(R.id.edit_comment);
+        add_physical_checkup_data = view.findViewById(R.id.add_physical_checkup_data);
+        add_height = view.findViewById(R.id.add_height);
+        add_weight = view.findViewById(R.id.add_weight);
+        add_comment = view.findViewById(R.id.add_comment);
 
         return builder.create();
     }

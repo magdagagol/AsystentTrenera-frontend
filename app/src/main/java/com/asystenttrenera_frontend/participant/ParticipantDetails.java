@@ -24,15 +24,18 @@ import com.asystenttrenera_frontend.R;
 import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.group.GroupsActivity;
 import com.asystenttrenera_frontend.kyu.KyuActivity;
+import com.asystenttrenera_frontend.parent.AddParentDialog;
 import com.asystenttrenera_frontend.parent.Parent;
 import com.asystenttrenera_frontend.parent.ParentAdapter;
+import com.asystenttrenera_frontend.parent.ParentService;
 import com.asystenttrenera_frontend.parent.ParentsListFrag;
 import com.asystenttrenera_frontend.physicalCheckup.PhysicalCheckupActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParticipantDetails extends AppCompatActivity implements EditParticipantDialog.EditParticipantDialogListener {
+public class ParticipantDetails extends AppCompatActivity implements EditParticipantDialog.EditParticipantDialogListener,
+        AddParentDialog.AddParentDialogListener {
     Participant participant;
 
     @Override
@@ -46,6 +49,9 @@ public class ParticipantDetails extends AppCompatActivity implements EditPartici
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         switch (item.getItemId()){
+            case R.id.parent:
+                addParent();
+                break;
             case R.id.edit:
                 editParticipant(participant);
                 Toast.makeText(this, "Edycja zawodnika", Toast.LENGTH_SHORT).show();
@@ -124,5 +130,18 @@ public class ParticipantDetails extends AppCompatActivity implements EditPartici
         Participant participant = new Participant(name, surname, birth, email, phone);
         ParticipantService participantService = new ParticipantService(ParticipantDetails.this);
         participantService.updateParticipant(participant, id);
+    }
+
+    @Override
+    public void applyText(String name, String surname, String phone, String email, Boolean agree) {
+        Parent parent = new Parent(name, surname, phone, email, agree);
+        ParentService parentService = new ParentService(ParticipantDetails.this);
+        parentService.addParent(parent, participant.getId());
+
+    }
+
+    private void addParent() {
+        AddParentDialog addParentDialog = new AddParentDialog();
+        addParentDialog.show(getSupportFragmentManager(), "addParentDialog");
     }
 }

@@ -121,7 +121,7 @@ public class KyuActivity extends AppCompatActivity implements AddKyuDialog.AddKy
         Bundle args = new Bundle();
         args.putParcelable("kyu", kyu);
         editKyuDialog.setArguments(args);
-        editKyuDialog.show(getSupportFragmentManager(), "addPhysicalCheckupDialog");
+        editKyuDialog.show(getSupportFragmentManager(), "addKyuDialog");
     }
 
     @Override

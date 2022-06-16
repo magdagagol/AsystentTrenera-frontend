@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.asystenttrenera_frontend.attendance.AttendanceRegisterActivity;
 import com.asystenttrenera_frontend.group.Group;
 import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.group.GroupsActivity;
@@ -19,9 +20,10 @@ import com.asystenttrenera_frontend.participant.ParticipantService;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnZawodnicy;
-    Button btnGroups;
+    private Button btnZawodnicy;
+    private Button btnGroups;
     private Button btnMessage;
+    private Button btnAttendanceRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         btnZawodnicy = findViewById(R.id.btnParticipants);
         btnGroups = findViewById(R.id.btnGroups);
         btnMessage = findViewById(R.id.btnMessages);
+        btnAttendanceRegister = findViewById(R.id.btnAttendanceRegister);
 
         btnZawodnicy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
                 });
 
 
+            }
+        });
+
+        btnAttendanceRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AttendanceRegisterActivity.class);
+                startActivity(intent);
             }
         });
 

@@ -34,7 +34,7 @@
             android:text="@string/zawodnicy" />
 
         <Button
-            android:id="@+id/btnAttendentRegister"
+            android:id="@+id/btnAttendanceRegister"
             android:layout_width="195dp"
             android:layout_height="match_parent"
             android:layout_margin="5dp"

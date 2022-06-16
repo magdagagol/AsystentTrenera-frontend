@@ -3,20 +3,23 @@ package com.asystenttrenera_frontend.participant;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.asystenttrenera_frontend.R;
+import com.asystenttrenera_frontend.parent.Parent;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class AddParticipant extends AppCompatActivity {
     EditText addParticipantName, addParticipantSurname, addParticipantYearOfBirth,
             addParticipantEmail, addParticipantPhoneNumber;
-
     Button addNewParticipant;
 
     @Override
@@ -45,8 +48,8 @@ public class AddParticipant extends AppCompatActivity {
                 );
 
                 ParticipantService participantService = new ParticipantService(AddParticipant.this);
-                JSONObject object = participantService.createObject(participant);
-                participantService.addParticipant(object);
+                //JSONObject object = participantService.createObject(participant);
+                participantService.addParticipant(participant);
 
                 Toast.makeText(AddParticipant.this, "Zawodnik zosatł dodany", Toast.LENGTH_SHORT).show();
                 AddParticipant.this.finish();

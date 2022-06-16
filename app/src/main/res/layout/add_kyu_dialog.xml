@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="Data egzaminu" />
+            android:hint="dd/mm/yyyy" />
 
         <EditText
             android:id="@+id/add_kyu_degree"
@@ -25,7 +25,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:text="Stopień kyu" />
+            android:hint="Stopień kyu" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

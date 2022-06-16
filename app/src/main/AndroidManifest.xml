@@ -23,6 +23,9 @@
         </receiver>
 
         <activity
+            android:name=".attendance.AttendanceRegisterActivity"
+            android:exported="false" />
+        <activity
             android:name=".message.MessageActivity"
             android:exported="false" />
         <activity

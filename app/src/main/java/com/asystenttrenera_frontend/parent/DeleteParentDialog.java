@@ -11,10 +11,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.asystenttrenera_frontend.R;
+import com.asystenttrenera_frontend.participant.Participant;
 
 
 public class DeleteParentDialog extends AppCompatDialogFragment {
     private DeleteParentDialogListener listener;
+    private Parent parent;
     private Long id;
 
     @NonNull
@@ -23,10 +25,11 @@ public class DeleteParentDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
         Bundle extras = this.getArguments();
-        id = extras.getLong("parent_id");
+        parent = extras.getParcelable("parent");
+        id = parent.getId();
 
         builder.setMessage("")
-                .setTitle("Czy usunąć Parent?")
+                .setTitle("Czy usunąć dane rodzica?")
                 .setNegativeButton("Anuluj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

@@ -43,7 +43,6 @@ public class GroupService {
                     public void onResponse(JSONArray response) {
                         ArrayList<Group> groupArrayList = new ArrayList<>();
                         try {
-                            ArrayList<Participant> participants = new ArrayList<>();
                             for(int i=0; i< response.length(); i++){
                                 JSONObject object = response.getJSONObject(i);
                                 System.out.println("response.getJSONObject(i)" + response.getJSONObject(i));
