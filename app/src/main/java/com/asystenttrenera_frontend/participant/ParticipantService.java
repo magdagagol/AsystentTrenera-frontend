@@ -91,20 +91,29 @@ public class ParticipantService {
                                                 participant.getString("phoneNumber"),
                                                 parentsList
                                         ));
+                                    } else {
+                                        participantList.add(new Participant(
+                                                participant.getLong("id"),
+                                                participant.getString("name"),
+                                                participant.getString("surname"),
+                                                participant.getString("yearOfBirth"),
+                                                participant.getString("email"),
+                                                participant.getString("phoneNumber")
+                                        ));
                                     }
                                 } catch (Exception e) {
                                     Log.i("exception", e.toString());
                                 }
                                     //parentsList.add(new Parent("Nie ma takiego rodzica"));
-                                    participantList.add(new Participant(
-                                            participant.getLong("id"),
-                                            participant.getString("name"),
-                                            participant.getString("surname"),
-                                            participant.getString("yearOfBirth"),
-                                            participant.getString("email"),
-                                            participant.getString("phoneNumber"),
-                                            new ArrayList<>()
-                                    ));
+                                   // participantList.add(new Participant(
+                                   //         participant.getLong("id"),
+                                   //         participant.getString("name"),
+                                   //         participant.getString("surname"),
+                                   //         participant.getString("yearOfBirth"),
+                                   //         participant.getString("email"),
+                                   //         participant.getString("phoneNumber"),
+                                   //         new ArrayList<>()
+                                   // ));
                             }
 
                         } catch (JSONException e) {
@@ -188,7 +197,9 @@ public class ParticipantService {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
+                        Log.i("delete participant", id.toString());
                     }
+
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {

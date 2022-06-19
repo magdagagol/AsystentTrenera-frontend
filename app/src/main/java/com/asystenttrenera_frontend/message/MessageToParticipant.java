@@ -1,5 +1,6 @@
 package com.asystenttrenera_frontend.message;
 
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -73,6 +74,7 @@ public class MessageToParticipant extends Fragment {
                                 String text = String.valueOf(message.getText());
 
                                 startAlarm(calender, phone, text);
+                                getActivity().finish();
                             }
                         });
                     }
@@ -95,6 +97,7 @@ public class MessageToParticipant extends Fragment {
         intent.putExtra("text", text);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         am.set( AlarmManager.RTC_WAKEUP, c.getTimeInMillis() , pendingIntent );
 
         Log.i("alarm", "time to sent: " + c.getTime());

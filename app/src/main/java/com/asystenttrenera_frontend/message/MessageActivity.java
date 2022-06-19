@@ -1,5 +1,7 @@
 package com.asystenttrenera_frontend.message;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,14 +58,9 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
 
 
         if(ContextCompat.checkSelfPermission( MessageActivity.this, Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
-            try {
-                //Toast.makeText(MessageActivity.this, "Message is sent", Toast.LENGTH_SHORT).show();
-            } catch (Exception e) {
                 Toast.makeText(MessageActivity.this, "Fail sent message", Toast.LENGTH_SHORT).show();
-            }
-
         } else {
-            System.out.println("########################## permission not working");
+            Log.d(TAG, "Permission error");
             requestStoragePermission();
         }
     }
@@ -83,7 +80,9 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
     private void requestStoragePermission() {
         if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
 
-            new AlertDialog.Builder(this).setTitle("Permissio").setMessage("aaa").setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            new AlertDialog.Builder(this).setTitle("Permissio")
+                    .setMessage("Do działania aplikacja potrzebuje zgody na dostęp do managera wiadomości")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     ActivityCompat.requestPermissions(MessageActivity.this, new String[] {Manifest.permission.SEND_SMS}, STORAGE_PERMISSION_CODE);
@@ -98,8 +97,6 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
         } else {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.SEND_SMS}, STORAGE_PERMISSION_CODE);
         }
-
-
     }
 
     public void showTimePickerDialog(View v) {
@@ -172,6 +169,7 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
         TextView time = findViewById(R.id.dateTimePickerTV);
 
         String dtStart = (String) date.getText() + " " + time.getText();
+        Log.i("date", dtStart);
 
         SimpleDateFormat format = new SimpleDateFormat("MMM dd, yyyy HH:mm:ss aa");
         Date date2 = null;
@@ -181,7 +179,6 @@ public class MessageActivity extends AppCompatActivity implements AdapterView.On
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        System.out.println(date2);
         return date2;
     }
 }

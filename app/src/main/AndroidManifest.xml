@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
 
     <application
@@ -19,12 +20,16 @@
 
         <receiver
             android:name=".message.AlarmReceiver"
-            android:enabled="true" >
+            android:process=":remote"
+            android:enabled="true">
         </receiver>
 
         <activity
             android:name=".attendance.AttendanceRegisterActivity"
             android:exported="false" />
+        <activity
+        android:name=".attendance.AddAttendance"
+        android:exported="false" />
         <activity
             android:name=".message.MessageActivity"
             android:exported="false" />
@@ -49,10 +54,6 @@
         <activity
             android:name=".participant.ParticipantDetails"
             android:exported="false" />
-        <activity android:name=".zawodnik.EdytujZawodnika" />
-        <activity android:name=".zawodnik.DodajZawodnika" />
-        <activity android:name=".zawodnik.ZawodnikDetails" />
-        <activity android:name=".zawodnik.ZawodnikActivity" />
         <activity android:name=".participant.ParticipantActivity" />
         <activity
             android:name=".MainActivity"
