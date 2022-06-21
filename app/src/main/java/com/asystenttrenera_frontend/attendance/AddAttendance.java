@@ -2,7 +2,6 @@ package com.asystenttrenera_frontend.attendance;
 
 import android.app.DatePickerDialog;
 import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,32 +9,31 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.asystenttrenera_frontend.R;
-import com.asystenttrenera_frontend.group.CheckBoxAdapter;
 import com.asystenttrenera_frontend.group.Group;
 import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.message.DatePickerFragment;
 import com.asystenttrenera_frontend.message.GroupAdapter;
 import com.asystenttrenera_frontend.participant.Participant;
-import com.asystenttrenera_frontend.participant.ParticipantService;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddAttendance extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     Button chooseDate;
+    Button addAttendance;
     GroupAdapter groupAdapter;
     ArrayList<Group> groupArrayList;
     Group group;
     ArrayList<Participant> participants;
+    Date myDate;
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {
@@ -44,6 +42,7 @@ public class AddAttendance extends AppCompatActivity implements DatePickerDialog
         setContentView(R.layout.add_attendance);
         getSupportActionBar().setTitle("Nowa lista obecnośći");
 
+        addAttendance = findViewById(R.id.add_attendance_button);
         chooseDate = findViewById(R.id.add_attendance_date);
 
         chooseDate.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +78,14 @@ public class AddAttendance extends AppCompatActivity implements DatePickerDialog
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             group = (Group) adapterView.getItemAtPosition(i);
-                            getParticipantFromGroup(group);
+                           // getParticipantFromGroup(group);
+                            addAttendance.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Log.d("add attendance date", myDate.toString());
+                                    addNewAttendance(myDate , group);
+                                }
+                            });
                         }
 
                         @Override
@@ -98,11 +104,11 @@ public class AddAttendance extends AppCompatActivity implements DatePickerDialog
 
         Bundle bundle = new Bundle();
         bundle.putParcelable("group", group);
-        AddAttendanceFragment fragment = new AddAttendanceFragment();
-        fragment.setArguments(bundle);
+        AttendanceDetails fragment = new AttendanceDetails();
+       // fragment.setArguments(bundle);
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout1, fragment)
-                .commit();
+      //  getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout1, fragment)
+       //         .commit();
 
     }
 
@@ -120,9 +126,13 @@ public class AddAttendance extends AppCompatActivity implements DatePickerDialog
 
         String currentDate = DateFormat.getDateInstance().format(c.getTime());
         TextView datePickerTV = findViewById(R.id.add_attendance_show_date);
+        myDate = c.getTime();
         datePickerTV.setText(currentDate);
+    }
 
-
+    public void addNewAttendance(Date date, Group group){
+        AttendanceService attendanceService = new AttendanceService(this);
+        attendanceService.addAttendance(date, group);
     }
 
 }

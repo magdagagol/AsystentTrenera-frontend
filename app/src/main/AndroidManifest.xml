@@ -25,7 +25,10 @@
         </receiver>
 
         <activity
-            android:name=".attendance.AttendanceRegisterActivity"
+            android:name=".attendance.AttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".attendance.AttendanceDetails"
             android:exported="false" />
         <activity
         android:name=".attendance.AddAttendance"

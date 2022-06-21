@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.asystenttrenera_frontend.attendance.AttendanceRegisterActivity;
+import com.asystenttrenera_frontend.attendance.AttendanceActivity;
 import com.asystenttrenera_frontend.group.Group;
 import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.group.GroupsActivity;
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         btnAttendanceRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AttendanceRegisterActivity.class);
+                Intent intent = new Intent(MainActivity.this, AttendanceActivity.class);
                 startActivity(intent);
             }
         });

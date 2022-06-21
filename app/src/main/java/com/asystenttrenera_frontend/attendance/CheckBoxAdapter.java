@@ -2,7 +2,6 @@ package com.asystenttrenera_frontend.attendance;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,23 +9,21 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asystenttrenera_frontend.R;
-import com.asystenttrenera_frontend.group.CheckBoxAdapter;
 import com.asystenttrenera_frontend.participant.Participant;
 
 import java.util.ArrayList;
 
-public class CheckBoxFragmentAdapter extends RecyclerView.Adapter<CheckBoxFragmentAdapter.ViewHolder> {
+public class CheckBoxAdapter extends RecyclerView.Adapter<CheckBoxAdapter.ViewHolder> {
     View view;
-    Fragment context;
+    Context context;
     ArrayList<Participant> participants;
     private ArrayList<Participant> arrayListChecked = new ArrayList<>();
     private OnCheckedInfoListener onCheckedInfoListener;
 
-    public CheckBoxFragmentAdapter(Fragment context, ArrayList<Participant> participants) {
+    public CheckBoxAdapter(Context context, ArrayList<Participant> participants) {
         this.context = context;
         this.participants = participants;
         System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7" + participants);
@@ -71,11 +68,9 @@ public class CheckBoxFragmentAdapter extends RecyclerView.Adapter<CheckBoxFragme
                         arrayListChecked.remove(participants.get(position));
                     }
 
-                   // Bundle bundle = new Bundle();
-
-                   // intent.putExtra("participants", arrayListChecked);
-                    //onCheckedInfoListener.onCheckedInfoListener(intent);
-                    onCheckedInfoListener.onCheckedInfoListener(arrayListChecked);
+                    Intent intent = new Intent();
+                    intent.putExtra("participants", arrayListChecked);
+                    onCheckedInfoListener.onCheckedInfoListener(intent);
                     Log.d("participants array from adapter", arrayListChecked.toString());
                 }
             });
@@ -96,6 +91,6 @@ public class CheckBoxFragmentAdapter extends RecyclerView.Adapter<CheckBoxFragme
         }
     }
     public interface OnCheckedInfoListener{
-        public ArrayList<Participant> onCheckedInfoListener(ArrayList<Participant> p);
+        public ArrayList<Participant> onCheckedInfoListener(Intent intent);
     }
 }

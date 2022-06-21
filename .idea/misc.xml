@@ -30,7 +30,10 @@
         <entry key="app/src/main/res/layout/add_parent_dialog.xml" value="0.33" />
         <entry key="app/src/main/res/layout/add_participant_to_group_item.xml" value="0.18262411347517732" />
         <entry key="app/src/main/res/layout/add_physical_checkup_dialog.xml" value="0.17407407407407408" />
+        <entry key="app/src/main/res/layout/attendance_activity.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/attendance_details.xml" value="0.13438368860055608" />
         <entry key="app/src/main/res/layout/attendance_register_activity.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/attendance_reyecler_item.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/checkbox_add_participant_to_group_item.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/checkbox_attendance_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_spinner_participant_adapter.xml" value="0.14915254237288136" />
