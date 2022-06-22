@@ -16,13 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.asystenttrenera_frontend.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.ParseException;
 import java.util.Date;
 
 public class AddKyuDialog extends AppCompatDialogFragment {
-    private EditText add_exam_date;
-    private EditText add_kyu_degree;
+    private TextInputLayout add_exam_date;
+    private TextInputLayout add_kyu_degree;
     private AddKyuDialogListener listener;
 
     @NonNull
@@ -44,7 +45,7 @@ public class AddKyuDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Dodaj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String dateString = add_exam_date.getText().toString();
+                        String dateString = add_exam_date.getEditText().getText().toString();
                         Date date = null;
                         try {
                             date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
@@ -52,7 +53,7 @@ public class AddKyuDialog extends AppCompatDialogFragment {
                             e.printStackTrace();
                         }
                         Log.i("date1", date.toString());
-                        String kyuDegree = add_kyu_degree.getText().toString();
+                        String kyuDegree = add_kyu_degree.getEditText().getText().toString();
 
                         listener.applyTexts(date, kyuDegree);
                     }

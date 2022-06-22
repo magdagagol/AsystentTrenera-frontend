@@ -16,15 +16,16 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.asystenttrenera_frontend.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.ParseException;
 import java.util.Date;
 
 public class AddPhysicalCheckupDialog extends AppCompatDialogFragment {
-    private EditText add_physical_checkup_data;
-    private EditText add_height;
-    private EditText add_weight;
-    private EditText add_comment;
+    private TextInputLayout add_physical_checkup_data;
+    private TextInputLayout add_height;
+    private TextInputLayout add_weight;
+    private TextInputLayout add_comment;
     private AddPhysicalCheckupDialogListener listener;
 
     @NonNull
@@ -46,7 +47,7 @@ public class AddPhysicalCheckupDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Dodaj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        String dateString = add_physical_checkup_data.getText().toString();
+                        String dateString = add_physical_checkup_data.getEditText().getText().toString();
                         Date date = null;
                         try {
                             date = new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
@@ -54,9 +55,9 @@ public class AddPhysicalCheckupDialog extends AppCompatDialogFragment {
                             e.printStackTrace();
                         }
                         Log.i("date1", date.toString());
-                        Double height  = Double.parseDouble(add_height.getText().toString());
-                        Double weight = Double.parseDouble(add_weight.getText().toString());
-                        String comment = add_comment.getText().toString();
+                        Double height  = Double.parseDouble(add_height.getEditText().getText().toString());
+                        Double weight = Double.parseDouble(add_weight.getEditText().getText().toString());
+                        String comment = add_comment.getEditText().getText().toString();
 
                         listener.applyTexts(date, height, weight, comment);
                     }

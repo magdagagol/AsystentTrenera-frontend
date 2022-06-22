@@ -10,22 +10,37 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_exam_date"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="dd/mm/yyyy" />
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            app:counterMaxLength="15"
+            app:errorEnabled="true">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Data egzaminu dd/mm/yyyy"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/add_kyu_degree"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:hint="Stopień kyu" />
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            app:counterMaxLength="15"
+            app:errorEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Stopień kyu"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

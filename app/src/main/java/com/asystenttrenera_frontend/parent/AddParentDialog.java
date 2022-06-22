@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.asystenttrenera_frontend.R;
 import com.asystenttrenera_frontend.kyu.AddKyuDialog;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputLayout;
 
 public class AddParentDialog extends AppCompatDialogFragment {
@@ -21,6 +22,7 @@ public class AddParentDialog extends AppCompatDialogFragment {
     private TextInputLayout addParentSurname;
     private TextInputLayout addParentPhoneNumber;
     private TextInputLayout addParentEmail;
+    private MaterialCheckBox addParentAgreement;
 
     private AddParentDialogListener listener;
 
@@ -43,12 +45,17 @@ public class AddParentDialog extends AppCompatDialogFragment {
                 .setPositiveButton("Dodaj", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-
+                        Boolean agree = true;
                         String name = addParentName.getEditText().getText().toString();
                         String surname = addParentSurname.getEditText().getText().toString();
                         String phone = addParentPhoneNumber.getEditText().getText().toString();
                         String email = addParentEmail.getEditText().getText().toString();
-                        Boolean agree = true;
+                        if(addParentAgreement.isChecked()){
+                            agree = true;
+                        } else {
+                            agree = false;
+                        }
+
                         listener.applyText(name, surname, phone, email, agree );
                     }
                 });
@@ -56,6 +63,7 @@ public class AddParentDialog extends AppCompatDialogFragment {
         addParentSurname = view.findViewById(R.id.add_paren_surname);
         addParentPhoneNumber = view.findViewById(R.id.add_parent_phone_number);
         addParentEmail = view.findViewById(R.id.add_parent_email);
+        addParentAgreement = view.findViewById(R.id.add_parent_agreement);
 
         return builder.create();
     }

@@ -26,10 +26,10 @@
         <entry key="app/src/main/res/layout/activity_zawodnik_details.xml" value="0.20989583333333334" />
         <entry key="app/src/main/res/layout/add_attendance.xml" value="0.33" />
         <entry key="app/src/main/res/layout/add_attendance_dialog.xml" value="0.37552083333333336" />
-        <entry key="app/src/main/res/layout/add_kyu_dialog.xml" value="0.13160333642261354" />
-        <entry key="app/src/main/res/layout/add_parent_dialog.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/add_kyu_dialog.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/add_parent_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/add_participant_to_group_item.xml" value="0.18262411347517732" />
-        <entry key="app/src/main/res/layout/add_physical_checkup_dialog.xml" value="0.17407407407407408" />
+        <entry key="app/src/main/res/layout/add_physical_checkup_dialog.xml" value="0.5" />
         <entry key="app/src/main/res/layout/attendance_activity.xml" value="0.33" />
         <entry key="app/src/main/res/layout/attendance_details.xml" value="0.1" />
         <entry key="app/src/main/res/layout/attendance_register_activity.xml" value="0.37552083333333336" />
