@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout/activity_participant_details.xml" value="0.3497536945812808" />
         <entry key="app/src/main/res/layout/activity_physical_checkup.xml" value="0.15555555555555556" />
         <entry key="app/src/main/res/layout/activity_zawodnik_details.xml" value="0.20989583333333334" />
-        <entry key="app/src/main/res/layout/add_attendance.xml" value="0.18253968253968253" />
+        <entry key="app/src/main/res/layout/add_attendance.xml" value="0.33" />
         <entry key="app/src/main/res/layout/add_attendance_dialog.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/add_kyu_dialog.xml" value="0.13160333642261354" />
         <entry key="app/src/main/res/layout/add_parent_dialog.xml" value="0.33" />
@@ -33,7 +33,7 @@
         <entry key="app/src/main/res/layout/attendance_activity.xml" value="0.33" />
         <entry key="app/src/main/res/layout/attendance_details.xml" value="0.13438368860055608" />
         <entry key="app/src/main/res/layout/attendance_register_activity.xml" value="0.37552083333333336" />
-        <entry key="app/src/main/res/layout/attendance_reyecler_item.xml" value="0.37552083333333336" />
+        <entry key="app/src/main/res/layout/attendance_reyecler_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/checkbox_add_participant_to_group_item.xml" value="0.37552083333333336" />
         <entry key="app/src/main/res/layout/checkbox_attendance_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/custom_spinner_participant_adapter.xml" value="0.14915254237288136" />

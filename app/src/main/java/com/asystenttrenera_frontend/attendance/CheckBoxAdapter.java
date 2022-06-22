@@ -20,19 +20,15 @@ public class CheckBoxAdapter extends RecyclerView.Adapter<CheckBoxAdapter.ViewHo
     View view;
     Context context;
     ArrayList<Participant> participants;
+    Attendance attendance;
     private ArrayList<Participant> arrayListChecked = new ArrayList<>();
     private OnCheckedInfoListener onCheckedInfoListener;
 
-    public CheckBoxAdapter(Context context, ArrayList<Participant> participants) {
+    public CheckBoxAdapter(Context context, ArrayList<Participant> participants, Attendance attendance) {
         this.context = context;
         this.participants = participants;
-        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&7" + participants);
+        this.attendance = attendance;
         this.onCheckedInfoListener = (OnCheckedInfoListener) context;
-       // try {
-       //
-       // } catch (ClassCastException e) {
-       //     throw new ClassCastException(e.getMessage());
-       // }
     }
 
     @NonNull
@@ -44,20 +40,19 @@ public class CheckBoxAdapter extends RecyclerView.Adapter<CheckBoxAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.checkBox.setText(participants.get(position).getName() + " " + participants.get(position).getSurname());
-        //holder.checkBox.setText("aaaaaaaaaaaaaaaaaa");
-        System.out.println("##################################################");
-
+       // holder.checkBox.setText(participants.get(position).getName() + " " + participants.get(position).getSurname());
+        Log.i("checked1", participants.get(position).toString());
+        Log.i("checked2", attendance.toString());
         if (participants != null && participants.size() > 0) {
             holder.checkBox.setText(participants.get(position).getName() + " " + participants.get(position).getSurname());
-            holder.checkBox.setChecked(false);
-           // if(participants.get(position).getGroup() != null) {
-           //     holder.checkBox.setChecked(true);
-           //     Log.i("checked", participants.get(position).toString());
-           //     arrayListChecked.add(participants.get(position));
-           // } else {
-           //
-           // }
+
+            for(int i=0; i<attendance.getParticipants().size(); i++){
+                if(participants.get(position).getId() == attendance.getParticipants().get(i).getId()) {
+                    holder.checkBox.setChecked(true);
+                    Log.i("checked", participants.get(position).toString());
+                    arrayListChecked.add(participants.get(position));
+                }
+            }
 
             holder.checkBox.setOnClickListener(new View.OnClickListener() {
                 @Override

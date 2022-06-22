@@ -32,12 +32,12 @@ public class AttendanceDetails extends AppCompatActivity implements CheckBoxAdap
 
         Intent intent = getIntent();
         attendance = intent.getParcelableExtra("details");
+        getSupportActionBar().setTitle(attendance.getDate() + " - " + attendance.getGroup().getName());
 
-        Log.d("attendance group", attendance.getGroup().toString());
+        Log.d("attendance group", attendance.toString());
         recyclerView = findViewById(R.id.recycler_add_attendance);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         Button button = findViewById(R.id.button22);
-
         AttendanceService attendanceService = new AttendanceService(this);
 
         if(attendance != null){
@@ -51,7 +51,7 @@ public class AttendanceDetails extends AppCompatActivity implements CheckBoxAdap
                 @Override
                 public void onResponse(ArrayList<Participant> response) {
                     participants = response;
-                    adapter = new CheckBoxAdapter(AttendanceDetails.this, participants);
+                    adapter = new CheckBoxAdapter(AttendanceDetails.this, participants, attendance);
                     recyclerView.setAdapter(adapter);
                     if (participants.isEmpty()){
                         Log.d("attendance", "no participant in this group");
@@ -74,7 +74,7 @@ public class AttendanceDetails extends AppCompatActivity implements CheckBoxAdap
                     }
                 }
             }, attendance.getGroup().getId());
-            Log.i("group attendance fragment", attendance.getGroup().toString());
+            Log.i("group attendance fragment", attendance.getParticipants().toString());
 
         }
 

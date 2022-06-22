@@ -16,6 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.asystenttrenera_frontend.group.Group;
 import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.participant.MySingleton;
+import com.asystenttrenera_frontend.participant.Participant;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AttendanceService {
     public static final String QUERY_FOR_ATTENDANCE = "http://10.0.2.2:8080/api/attendance";
@@ -67,11 +69,31 @@ public class AttendanceService {
                                 } catch (Exception e) {
                                     Log.i("exception", e.toString());
                                 }
+                                List<Participant> participantArrayList = new ArrayList<>();
+                                try {
+                                    JSONArray participants = object.getJSONArray("participants");
+
+                                    for(int j=0; j<participants.length(); j++){
+                                        JSONObject participant = participants.getJSONObject(j);
+                                        participantArrayList.add(new Participant(
+                                                participant.getLong("id"),
+                                                participant.getString("name"),
+                                                participant.getString("surname"),
+                                                participant.getString("yearOfBirth")
+                                        ));
+                                    }
+                                    Log.i("json participants", participants.toString());
+                                    Log.i("json participants array list", participantArrayList.toString());
+
+                                } catch (Exception e) {
+                                    Log.i("exception", e.toString());
+                                }
 
                                 attendanceArrayList.add(new Attendance(
                                         object.getLong("id"),
                                         date,
-                                        group
+                                        group,
+                                        participantArrayList
                                 ));
 
                             }

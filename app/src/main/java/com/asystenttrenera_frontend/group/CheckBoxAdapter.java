@@ -22,7 +22,6 @@ public class CheckBoxAdapter extends RecyclerView.Adapter<CheckBoxAdapter.ViewHo
     private ArrayList<Participant> participants;
     View view;
     private ArrayList<Participant> arrayListChecked = new ArrayList<>();
-    private ArrayList<Participant> arrayListUnchecked = new ArrayList<>();
     private OnCheckedInfoListener onCheckedInfoListener;
 
     public CheckBoxAdapter(Context context, ArrayList<Participant> participants) {
