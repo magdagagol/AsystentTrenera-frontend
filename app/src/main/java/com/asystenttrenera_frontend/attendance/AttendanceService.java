@@ -6,6 +6,7 @@ import android.content.Context;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -59,7 +60,6 @@ public class AttendanceService {
                                } catch (ParseException e) {
                                    e.printStackTrace();
                                }
-                                System.out.println("#################################date: "+ date.toString());
                                 try {
                                     JSONObject jsonObjectGroup = object.getJSONObject("group");
 
@@ -151,6 +151,23 @@ public class AttendanceService {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d(TAG, "assign attendance to participant NOT works");
+                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                    }
+                });
+        MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
+    }
+
+    //DELETE
+    public void deleteAttendance(Long id){
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
+                (Request.Method.DELETE, url+"/"+id, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
                         VolleyLog.d(TAG, "Error: " + error.getMessage());
                     }
                 });

@@ -49,9 +49,8 @@ public class GroupDetails extends AppCompatActivity implements EditGroupDialog.A
             case R.id.delete:
                 GroupService groupService = new GroupService(this);
                 groupService.deleteGroupObject(group.getId());
-                Log.i("group id", group.getId().toString());
                 Toast.makeText(this, "Grupa została usunięta", Toast.LENGTH_SHORT).show();
-                //adapter.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
                 break;
         }
         return super.onOptionsItemSelected(item);

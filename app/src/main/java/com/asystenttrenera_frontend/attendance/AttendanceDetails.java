@@ -1,28 +1,43 @@
 package com.asystenttrenera_frontend.attendance;
 
 import android.content.Intent;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.asystenttrenera_frontend.R;
+import com.asystenttrenera_frontend.group.GroupService;
 import com.asystenttrenera_frontend.participant.Participant;
 import com.asystenttrenera_frontend.participant.ParticipantService;
 
 import java.util.ArrayList;
 
-public class AttendanceDetails extends AppCompatActivity implements CheckBoxAdapter.OnCheckedInfoListener {
+public class AttendanceDetails extends AppCompatActivity implements CheckBoxAdapter.OnCheckedInfoListener, DeleteAttendanceDialog.DeleteAttendanceDialogListener {
     Attendance attendance;
     ArrayList<Participant> participants;
     ArrayList<Participant> participantsArray = null;
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.attendance_details, menu);
+        return true;
+    }
 
     @Nullable
     @Override
@@ -32,7 +47,10 @@ public class AttendanceDetails extends AppCompatActivity implements CheckBoxAdap
 
         Intent intent = getIntent();
         attendance = intent.getParcelableExtra("details");
-        getSupportActionBar().setTitle(attendance.getDate() + " - " + attendance.getGroup().getName());
+
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String dateStr = df.format(attendance.getDate());
+        getSupportActionBar().setTitle( dateStr + " - " + attendance.getGroup().getName());
 
         Log.d("attendance group", attendance.toString());
         recyclerView = findViewById(R.id.recycler_add_attendance);
@@ -78,14 +96,38 @@ public class AttendanceDetails extends AppCompatActivity implements CheckBoxAdap
 
         }
 
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.delete_attendance:
+                Log.i("item", "Usuń " + attendance.getDate().toString() +
+                        " " + attendance.getGroup().getName());
+                deleteAttendance(attendance.getId());
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
-
+    private void deleteAttendance(Long id) {
+        DeleteAttendanceDialog deleteAttendanceDialog = new DeleteAttendanceDialog();
+        Bundle args = new Bundle();
+        args.putLong("attendance_id", id);
+        deleteAttendanceDialog.setArguments(args);
+        deleteAttendanceDialog.show(getSupportFragmentManager(), "deleteAttendanceDialog");
     }
 
     @Override
     public ArrayList<Participant> onCheckedInfoListener(Intent intent) {
         participantsArray = intent.getParcelableArrayListExtra("participants");
         return participantsArray;
+    }
+
+    @Override
+    public void deleteTexts(Long id) {
+        AttendanceService attendanceService = new AttendanceService(AttendanceDetails.this);
+        attendanceService.deleteAttendance(id);
+        Toast.makeText(this, "Lista została usunieta", Toast.LENGTH_SHORT).show();
     }
 }

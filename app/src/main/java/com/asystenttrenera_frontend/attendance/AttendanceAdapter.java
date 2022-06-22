@@ -1,6 +1,8 @@
 package com.asystenttrenera_frontend.attendance;
 
 import android.content.Context;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,7 +62,9 @@ public class AttendanceAdapter extends RecyclerView.Adapter<AttendanceAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull AttendanceAdapter.ViewHolder holder, int position) {
         holder.itemView.setTag(attendanceArrayList.get(position));
-        holder.date.setText(attendanceArrayList.get(position).getDate().toString());
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        String dateStr = df.format(attendanceArrayList.get(position).getDate());
+        holder.date.setText(dateStr);
         holder.name.setText(attendanceArrayList.get(position).getGroup().getName());
     }
 
