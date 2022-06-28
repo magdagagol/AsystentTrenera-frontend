@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true" >
 
         <receiver
-            android:name=".message.AlarmReceiver"
+            android:name="com.asystenttrenera_frontend.message.AlarmReceiver"
             android:process=":remote"
             android:enabled="true">
         </receiver>

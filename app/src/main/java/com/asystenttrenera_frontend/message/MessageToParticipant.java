@@ -95,6 +95,7 @@ public class MessageToParticipant extends Fragment {
         Intent intent = new Intent(getActivity(), AlarmReceiver.class);
         intent.putExtra("phone", phone);
         intent.putExtra("text", text);
+        intent.putExtra("time", c.getTimeInMillis());
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 

@@ -15,17 +15,19 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String text = "test message";
         String phone = "123";
+        Long a = 1L;
         Bundle extras = intent.getExtras();
         if (extras != null) {
             text = extras.getString("text");
             phone = extras.getString("phone");
+            a = extras.getLong("time");
+
         }
         Calendar calender = Calendar.getInstance();
+        Calendar calender2 = Calendar.getInstance();
+        calender2.setTimeInMillis(a);
 
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(phone, null, text + " " + calender.getTime(), null, null);
-        Toast.makeText(context, "Message is sent", Toast.LENGTH_SHORT).show();
-
-        Log.i("alarm", "phone: " + phone + "text: " + text);
+        smsManager.sendTextMessage(phone, null, text, null, null);
     }
 }
